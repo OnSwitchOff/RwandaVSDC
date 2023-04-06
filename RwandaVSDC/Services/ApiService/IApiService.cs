@@ -8,7 +8,7 @@ namespace RwandaVSDC.Services.ApiService
 {
     public interface IApiService
     {
-        Task<ApiResult<string>> GetSomeData(string apiUrl);
-        Task<ApiResult<bool>> PostSomeData(string apiUrl, string data);
+        Task<ApiResult<string>> GetSomeDataAsync(string apiUrl);
+        Task<ApiResult<string>> PostSomeDataAsync(string apiUrl, string data);
     }
 }

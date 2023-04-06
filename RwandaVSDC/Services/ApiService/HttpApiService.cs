@@ -15,7 +15,7 @@ namespace RwandaVSDC.Services.ApiService
             _httpClient = httpClient;
         }
 
-        public async Task<ApiResult<string>> GetSomeData(string apiUrl)
+        public async Task<ApiResult<string>> GetSomeDataAsync(string apiUrl)
         {
             HttpResponseMessage response = await _httpClient.GetAsync(apiUrl);
 
@@ -41,26 +41,29 @@ namespace RwandaVSDC.Services.ApiService
             }
         }
 
-        public async Task<ApiResult<bool>> PostSomeData(string apiUrl, string data)
+        public async Task<ApiResult<string>> PostSomeDataAsync(string apiUrl, string data)
         {
             HttpContent httpContent = new StringContent(data);
             HttpResponseMessage response = await _httpClient.PostAsync(apiUrl, httpContent);
 
+            string responseData = await response.Content.ReadAsStringAsync();
+
             if (response.IsSuccessStatusCode)
             {
-                return new ApiResult<bool>
+                return new ApiResult<string>
                 {
                     Success = true,
-                    Data = true
+                    Data = responseData
                 };
             }
             else
             {
                 string errorMessage = $"Failed to post data to {apiUrl}. Status code: {response.StatusCode}. Reason: {response.ReasonPhrase}";
 
-                return new ApiResult<bool>
+                return new ApiResult<string>
                 {
                     Success = false,
+                    Data = responseData,
                     ErrorMessage = errorMessage
                 };
             }
