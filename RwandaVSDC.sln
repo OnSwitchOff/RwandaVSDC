@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33326.253
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RwandaVSDC", "RwandaVSDC\RwandaVSDC.csproj", "{9A75A543-CC75-40D1-BF9A-98A2EB2EF690}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RwandaVSDC.Test", "RwandaVSDC.Test\RwandaVSDC.Test.csproj", "{0971531A-BBCB-4ED0-906C-6C06C0A7A931}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9A75A543-CC75-40D1-BF9A-98A2EB2EF690}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A75A543-CC75-40D1-BF9A-98A2EB2EF690}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A75A543-CC75-40D1-BF9A-98A2EB2EF690}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A75A543-CC75-40D1-BF9A-98A2EB2EF690}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0971531A-BBCB-4ED0-906C-6C06C0A7A931}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0971531A-BBCB-4ED0-906C-6C06C0A7A931}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0971531A-BBCB-4ED0-906C-6C06C0A7A931}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0971531A-BBCB-4ED0-906C-6C06C0A7A931}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7D9FD96C-38F6-41EF-BF4A-2B15817CCBBD}
+	EndGlobalSection
+EndGlobal
