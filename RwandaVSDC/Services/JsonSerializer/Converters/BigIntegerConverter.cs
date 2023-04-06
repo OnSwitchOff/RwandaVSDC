@@ -14,7 +14,7 @@ namespace RwandaVSDC.Services.JsonSerializer.Converters
     {
         public override BigInteger Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            string? input = reader.GetString();
+            string? input = Encoding.UTF8.GetString(reader.ValueSpan);
             return string.IsNullOrEmpty(input) ? 0 : BigInteger.Parse(input);
         }
 
