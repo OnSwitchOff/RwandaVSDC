@@ -6,12 +6,12 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace RwandaVSDC.Models.JSON.Stock.SaveStockItems
+namespace RwandaVSDC.Models.JSON.Stock.SaveStockMaster
 {
     /// <summary>
-    /// Save Stock In/Out Response
+    /// Save Stock Master Response
     /// </summary>
-    public class SaveStockResponse
+    public class SaveStockMasterResponse
     {
         /// <summary>
         /// Result Code
@@ -34,10 +34,10 @@ namespace RwandaVSDC.Models.JSON.Stock.SaveStockItems
         public string? ResultDate { get; set; }
 
         [JsonPropertyName("data")]
-        public SaveStockResponseData? Data { get; set; }
+        public SaveStockMasterResponseData? Data { get; set; }
     }
 
-    public class SaveStockResponseData
+    public class SaveStockMasterResponseData
     {
 
     }
