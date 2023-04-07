@@ -49,7 +49,7 @@ namespace RwandaVSDC.Models.ValueObjects
                 case TaxpayerStatus.D:
                     return new TaxpayerStatusValueObject(taxpayerStatus.ToString(), (int)taxpayerStatus, CODE_NAME_D, CODE_DESCRIPTION_D);
                 default:
-                    throw new ArgumentException();
+                    throw new ArgumentOutOfRangeException();
             }
         }
 

@@ -59,7 +59,7 @@ namespace RwandaVSDC.Models.ValueObjects
                 case TaxType.D:
                     return new TaxTypeValueObject(taxType.ToString(), (int)taxType, CODE_NAME_D, CODE_DESCRIPTION_D);
                 default:
-                    throw new ArgumentException();
+                    throw new ArgumentOutOfRangeException();
             }            
         }
 

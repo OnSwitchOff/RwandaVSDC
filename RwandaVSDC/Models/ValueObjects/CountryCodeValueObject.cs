@@ -540,7 +540,7 @@ namespace RwandaVSDC.Models.ValueObjects
                 case CountryCode.ZW:
                     return new CountryCodeValueObject(countryCode.ToString(), (int)countryCode, "ZIMBABWE", "ZIMBABWE");
                 default:
-                    throw new ArgumentException();
+                    throw new ArgumentOutOfRangeException();
             }
         }
 

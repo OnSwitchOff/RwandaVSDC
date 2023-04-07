@@ -54,7 +54,7 @@ namespace RwandaVSDC.Models.ValueObjects
                 case ProductType.Service:
                     return new ProductTypeValueObject((int)productType, CODE_NAME_3, CODE_DESCRIPTION_3);
                 default:
-                    throw new ArgumentException();
+                    throw new ArgumentOutOfRangeException();
             }
         }
 
