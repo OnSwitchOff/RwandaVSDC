@@ -52,7 +52,7 @@ namespace RwandaVSDC.Test.ModelsTests.JSON.Stock.SelectStockItems
                                     TaxationTypeCode = "B",
                                     TaxableAmount = 1800000,
                                     TotalAmount = 1800000,
-                                    DiscountRate = 0
+                                    DiscountAmount = 0
                                 }
                             },
                             OccurredDate = "20200120",
@@ -87,7 +87,7 @@ namespace RwandaVSDC.Test.ModelsTests.JSON.Stock.SelectStockItems
                                     TaxationTypeCode = "B",
                                     TaxableAmount = 660000,
                                     TotalAmount = 660000,
-                                    DiscountRate = 0
+                                    DiscountAmount = 0
                                 }
                             },
                             OccurredDate = "20200110",
@@ -152,7 +152,7 @@ namespace RwandaVSDC.Test.ModelsTests.JSON.Stock.SelectStockItems
             model.Data.StockList[0].ItemList![0].TaxationTypeCode.Should().Be("B");
             model.Data.StockList[0].ItemList![0].TaxableAmount.Should().Be(1800000);
             model.Data.StockList[0].ItemList![0].TotalAmount.Should().Be(1800000);
-            model.Data.StockList[0].ItemList![0].DiscountRate.Should().Be(0);
+            model.Data.StockList[0].ItemList![0].DiscountAmount.Should().Be(0);
         }
     }
 }

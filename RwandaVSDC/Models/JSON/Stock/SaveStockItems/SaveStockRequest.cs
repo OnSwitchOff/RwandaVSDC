@@ -1,5 +1,4 @@
-﻿using RwandaVSDC.Models.JSON.Items.SaveItems;
-using RwandaVSDC.Models.JSON.Items.SelectItems;
+﻿using RwandaVSDC.Models.JSON.Stock.SelectStockItems;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,57 +8,64 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace RwandaVSDC.Models.JSON.Stock.SelectStockItems
+namespace RwandaVSDC.Models.JSON.Stock.SaveStockItems
 {
     /// <summary>
-    /// Search Stock Movement Response
+    /// Save Stock In/Out Request
     /// </summary>
-    public class StockMovementResponse
+    public class SaveStockRequest
     {
         /// <summary>
-        /// Result Code
+        /// TIN
         /// </summary>
-        [StringLength(3)]
-        [JsonPropertyName("resultCd")]
-        public string? ResultCode { get; set; }
+        [Required]
+        [StringLength(9)]
+        [JsonPropertyName("tin")]
+        public string? Tin { get; set; }
 
         /// <summary>
-        /// Result Message
+        /// Branch ID
         /// </summary>
-        [JsonPropertyName("resultMsg")]
-        public string? ResultMessage { get; set; }
+        [Required]
+        [StringLength(2)]
+        [JsonPropertyName("bhfId")]
+        public string? BranchId { get; set; }
 
         /// <summary>
-        /// Result Date
+        /// Stored and released Number
         /// </summary>
-        [StringLength(14)]
-        [JsonPropertyName("resultDt")]
-        public string? ResultDate { get; set; }
+        [Required]
+        [JsonPropertyName("sarNo")]
+        public BigInteger? StoredAndReleasedNumber { get; set; }
 
-        [JsonPropertyName("data")]
-        public StockMovementData? Data { get; set; }
-    }
-
-    public class StockMovementData
-    {
         /// <summary>
-        /// Stock movement information list
+        /// Stored and released Number
         /// </summary>
-        [JsonPropertyName("stockList")]
-        public List<StockMovementInformation>? StockList { get; set; }
-    }
+        [Required]
+        [JsonPropertyName("orgSarNo")]
+        public BigInteger? OriginalStoredAndReleasedNumber { get; set; }
 
-    /// <summary>
-    /// Stock movement information
-    /// </summary>
-    public class StockMovementInformation
-    {
+        /// <summary>
+        /// Registration Type Code
+        /// </summary>
+        [Required]
+        [StringLength(5)]
+        [JsonPropertyName("regTyCd")]
+        public string? RegistrationTypeCode { get; set; }
+
         /// <summary>
         /// Customer TIN
         /// </summary>
         [StringLength(9)]
         [JsonPropertyName("custTin")]
         public string? CustomerTin { get; set; }
+
+        /// <summary>
+        /// Customer name
+        /// </summary>
+        [StringLength(100)]
+        [JsonPropertyName("custNm")]
+        public string? CustomerName { get; set; }
 
         /// <summary>
         /// Customer Branch Office ID
@@ -69,14 +75,17 @@ namespace RwandaVSDC.Models.JSON.Stock.SelectStockItems
         public string? CustomerBranchOfficeId { get; set; }
 
         /// <summary>
-        /// Stored and released Number
+        /// Stored and released Type Code
         /// </summary>
-        [JsonPropertyName("sarNo")]
-        public BigInteger? StoredAndReleasedNumber { get; set; }
+        [Required]
+        [StringLength(5)]
+        [JsonPropertyName("sarTyCd")]
+        public string? StoredAndReleasedTypeCode { get; set; }
 
         /// <summary>
         /// Occurred Date(yyyyMMdd)
         /// </summary>
+        [Required]
         [StringLength(8)]
         [JsonPropertyName("ocrnDt")]
         public string? OccurredDate { get; set; }
@@ -84,24 +93,27 @@ namespace RwandaVSDC.Models.JSON.Stock.SelectStockItems
         /// <summary>
         /// Total Item Count
         /// </summary>
+        [Required]
         [JsonPropertyName("totItemCnt")]
         public uint? TotalItemCount { get; set; }
-
         /// <summary>
         /// Total Supply Price
         /// </summary>
+        [Required]
         [JsonPropertyName("totTaxblAmt")]
         public decimal? TotalTaxableAmount { get; set; }
 
         /// <summary>
         /// Total VAT
         /// </summary>
+        [Required]
         [JsonPropertyName("totTaxAmt")]
         public decimal? TotalTaxAmount { get; set; }
 
         /// <summary>
         /// Total Amount
         /// </summary>
+        [Required]
         [JsonPropertyName("totAmt")]
         public decimal? TotalAmount { get; set; }
 
@@ -112,27 +124,61 @@ namespace RwandaVSDC.Models.JSON.Stock.SelectStockItems
         [JsonPropertyName("remark")]
         public string? Remark { get; set; }
 
+
         /// <summary>
-        /// Stock movement item information list
+        /// Registrant ID 
+        /// </summary>
+        [Required]
+        [StringLength(20)]
+        [JsonPropertyName("regrId")]
+        public string? RegistrantId { get; set; }
+
+        /// <summary>
+        /// Registrant Name
+        /// </summary>
+        [Required]
+        [StringLength(60)]
+        [JsonPropertyName("regrNm")]
+        public string? RegistrantName { get; set; }
+
+        /// <summary>
+        /// Modifier Name 
+        /// </summary>
+        [Required]
+        [StringLength(60)]
+        [JsonPropertyName("modrNm")]
+        public string? ModifierName { get; set; }
+
+        /// <summary>
+        /// Modifier ID
+        /// </summary>
+        [Required]
+        [StringLength(20)]
+        [JsonPropertyName("modrId")]
+        public string? ModifierId { get; set; }
+
+        /// <summary>
+        /// Save Stock item information list
         /// </summary>
         [JsonPropertyName("itemList")]
-        public List<StockItemInformation>? ItemList { get; set; }
+        public List<SaveStockItemInformation>? ItemList { get; set; }
     }
 
     /// <summary>
-    /// Stock movement item information list
+    ///  Save Stock item information list
     /// </summary>
-    public class StockItemInformation
+    public class SaveStockItemInformation
     {
         /// <summary>
         /// Item Sequence
         /// </summary>
+        [Required]
         [JsonPropertyName("itemSeq")]
         public uint? ItemSequence { get; set; }
 
         /// <summary>
         /// Item Code
-        /// </summary>
+        /// </summary>        
         [JsonPropertyName("itemCd")]
         [StringLength(20)]
         public string? ItemCode { get; set; }
@@ -140,6 +186,7 @@ namespace RwandaVSDC.Models.JSON.Stock.SelectStockItems
         /// <summary>
         /// Item Classification Code
         /// </summary>
+        [Required]
         [JsonPropertyName("itemClsCd")]
         [StringLength(10)]
         public string? ItemClassificationCode { get; set; }
@@ -147,6 +194,7 @@ namespace RwandaVSDC.Models.JSON.Stock.SelectStockItems
         /// <summary>
         /// Item Name
         /// </summary>
+        [Required]
         [JsonPropertyName("itemNm")]
         [StringLength(200)]
         public string? ItemName { get; set; }
@@ -161,6 +209,7 @@ namespace RwandaVSDC.Models.JSON.Stock.SelectStockItems
         /// <summary>
         /// Packaging Unit Code
         /// </summary>
+        [Required]
         [JsonPropertyName("pkgUnitCd")]
         [StringLength(5)]
         public string? PackagingUnitCode { get; set; }
@@ -168,12 +217,14 @@ namespace RwandaVSDC.Models.JSON.Stock.SelectStockItems
         /// <summary>
         /// Package Quantity
         /// </summary>
+        [Required]
         [JsonPropertyName("pkg")]
         public decimal? PackageQuantity { get; set; }
 
         /// <summary>
         /// Quantity Unit Code
         /// </summary>
+        [Required]
         [JsonPropertyName("qtyUnitCd")]
         [StringLength(5)]
         public string? QuantityUnitCode { get; set; }
@@ -181,6 +232,7 @@ namespace RwandaVSDC.Models.JSON.Stock.SelectStockItems
         /// <summary>
         /// Unit Quantity
         /// </summary>
+        [Required]
         [JsonPropertyName("qty")]
         public decimal? UnitQuantity { get; set; }
 
@@ -194,30 +246,35 @@ namespace RwandaVSDC.Models.JSON.Stock.SelectStockItems
         /// <summary>
         /// Unit Price
         /// </summary>
+        [Required]
         [JsonPropertyName("prc")]
         public decimal? UnitPrice { get; set; }
 
         /// <summary>
         /// Supply Amount
         /// </summary>
+        [Required]
         [JsonPropertyName("splyAmt")]
         public decimal? SupplyAmount { get; set; }
 
         /// <summary>
-        /// Discount Rate
+        /// Discount Amount
         /// </summary>
+        [Required]
         [JsonPropertyName("totDcAmt")]
         public decimal? DiscountAmount { get; set; }
 
         /// <summary>
         /// Taxable Amount
         /// </summary>
+        [Required]
         [JsonPropertyName("taxblAmt")]
         public decimal? TaxableAmount { get; set; }
 
         /// <summary>
         /// Taxation Type Code
         /// </summary>
+        [Required]
         [JsonPropertyName("taxTyCd")]
         [StringLength(5)]
         public string? TaxationTypeCode { get; set; }
@@ -225,12 +282,14 @@ namespace RwandaVSDC.Models.JSON.Stock.SelectStockItems
         /// <summary>
         /// Tax Amount
         /// </summary>
+        [Required]
         [JsonPropertyName("taxAmt")]
         public decimal? TaxAmount { get; set; }
 
         /// <summary>
         /// Total Amount
         /// </summary>
+        [Required]
         [JsonPropertyName("totAmt")]
         public decimal? TotalAmount { get; set; }
     }
