@@ -23,7 +23,7 @@ namespace RwandaVSDC.Models.ValueObjects
         private const string CODE_DESCRIPTION_C = "C";
         private const string CODE_DESCRIPTION_D = "D";
 
-        private readonly TaxType _taxType;
+        private readonly string _code;
         private readonly int _sortOrder;
         private readonly string _codeName;
         private readonly string _codeDescription;
@@ -33,15 +33,15 @@ namespace RwandaVSDC.Models.ValueObjects
         public static readonly TaxTypeValueObject C = Create(TaxType.C);
         public static readonly TaxTypeValueObject D = Create(TaxType.D);
 
-        private TaxTypeValueObject(TaxType taxType, int sortOrder, string codeName, string codeDescription)
+        private TaxTypeValueObject(string code, int sortOrder, string codeName, string codeDescription)
         {
-            _taxType = taxType;
+            _code = code;
             _sortOrder = sortOrder;
             _codeName = codeName;
             _codeDescription = codeDescription;
         }
 
-        public TaxType TaxType => _taxType;
+        public string Code => _code;
         public int SortOrder => _sortOrder;
         public string CodeName => _codeName;
         public string CodeDescription => _codeDescription;
@@ -51,13 +51,13 @@ namespace RwandaVSDC.Models.ValueObjects
             switch (taxType)
             {
                 case TaxType.A:
-                    return new TaxTypeValueObject(taxType, (int)taxType, CODE_NAME_A, CODE_DESCRIPTION_A);
+                    return new TaxTypeValueObject(taxType.ToString(), (int)taxType, CODE_NAME_A, CODE_DESCRIPTION_A);
                 case TaxType.B:
-                    return new TaxTypeValueObject(taxType, (int)taxType, CODE_NAME_B, CODE_DESCRIPTION_B);
+                    return new TaxTypeValueObject(taxType.ToString(), (int)taxType, CODE_NAME_B, CODE_DESCRIPTION_B);
                 case TaxType.C:
-                    return new TaxTypeValueObject(taxType, (int)taxType, CODE_NAME_C, CODE_DESCRIPTION_C);
+                    return new TaxTypeValueObject(taxType.ToString(), (int)taxType, CODE_NAME_C, CODE_DESCRIPTION_C);
                 case TaxType.D:
-                    return new TaxTypeValueObject(taxType, (int)taxType, CODE_NAME_D, CODE_DESCRIPTION_D);
+                    return new TaxTypeValueObject(taxType.ToString(), (int)taxType, CODE_NAME_D, CODE_DESCRIPTION_D);
                 default:
                     throw new ArgumentException();
             }            
@@ -65,7 +65,7 @@ namespace RwandaVSDC.Models.ValueObjects
 
         protected override bool EqualsCore(TaxTypeValueObject other)
         {
-            return _taxType == other._taxType &&
+            return _code == other._code &&
                    _sortOrder == other._sortOrder &&
                    _codeName == other._codeName &&
                    _codeDescription == other._codeDescription;
@@ -73,7 +73,7 @@ namespace RwandaVSDC.Models.ValueObjects
 
         protected override int GetHashCodeCore()
         {
-            return HashCode.Combine(_taxType, _sortOrder, _codeName, _codeDescription);
+            return HashCode.Combine(_code, _sortOrder, _codeName, _codeDescription);
         }
     }
 }

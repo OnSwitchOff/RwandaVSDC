@@ -19,7 +19,7 @@ namespace RwandaVSDC.Models.ValueObjects
         private const string CODE_DESCRIPTION_A = "Active";
         private const string CODE_DESCRIPTION_D = "Discard";
 
-        private readonly TaxpayerStatus _taxpayerStatus;
+        private readonly string _code;
         private readonly int _sortOrder;
         private readonly string _codeName;
         private readonly string _codeDescription;
@@ -27,15 +27,15 @@ namespace RwandaVSDC.Models.ValueObjects
         public static readonly TaxpayerStatusValueObject A = Create(TaxpayerStatus.A);
         public static readonly TaxpayerStatusValueObject D = Create(TaxpayerStatus.D);
 
-        private TaxpayerStatusValueObject(TaxpayerStatus taxpayerStatus, int sortOrder, string codeName, string codeDescription)
+        private TaxpayerStatusValueObject(string code, int sortOrder, string codeName, string codeDescription)
         {
-            _taxpayerStatus = taxpayerStatus;
+            _code = code;
             _sortOrder = sortOrder;
             _codeName = codeName;
             _codeDescription = codeDescription;
         }
 
-        public TaxpayerStatus TaxpayerStatus => _taxpayerStatus;
+        public string Code => _code;
         public int SortOrder => _sortOrder;
         public string CodeName => _codeName;
         public string CodeDescription => _codeDescription;
@@ -45,9 +45,9 @@ namespace RwandaVSDC.Models.ValueObjects
             switch (taxpayerStatus)
             {
                 case TaxpayerStatus.A:
-                    return new TaxpayerStatusValueObject(taxpayerStatus, (int)taxpayerStatus, CODE_NAME_A, CODE_DESCRIPTION_A);
+                    return new TaxpayerStatusValueObject(taxpayerStatus.ToString(), (int)taxpayerStatus, CODE_NAME_A, CODE_DESCRIPTION_A);
                 case TaxpayerStatus.D:
-                    return new TaxpayerStatusValueObject(taxpayerStatus, (int)taxpayerStatus, CODE_NAME_D, CODE_DESCRIPTION_D);
+                    return new TaxpayerStatusValueObject(taxpayerStatus.ToString(), (int)taxpayerStatus, CODE_NAME_D, CODE_DESCRIPTION_D);
                 default:
                     throw new ArgumentException();
             }
@@ -55,7 +55,7 @@ namespace RwandaVSDC.Models.ValueObjects
 
         protected override bool EqualsCore(TaxpayerStatusValueObject other)
         {
-            return _taxpayerStatus == other._taxpayerStatus &&
+            return _code == other._code &&
                    _sortOrder == other._sortOrder &&
                    _codeName == other._codeName &&
                    _codeDescription == other._codeDescription;
@@ -63,7 +63,7 @@ namespace RwandaVSDC.Models.ValueObjects
 
         protected override int GetHashCodeCore()
         {
-            return HashCode.Combine(_taxpayerStatus, _sortOrder, _codeName, _codeDescription);
+            return HashCode.Combine(_code, _sortOrder, _codeName, _codeDescription);
         }
     }
 }
