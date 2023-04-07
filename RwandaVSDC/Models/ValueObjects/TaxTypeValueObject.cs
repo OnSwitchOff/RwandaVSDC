@@ -11,6 +11,7 @@ namespace RwandaVSDC.Models.ValueObjects
     public class TaxTypeValueObject : ValueObject<TaxTypeValueObject>
     {
         private static readonly string CodeClassification = "04";
+        private static readonly string CodeClassificationName = "Tax Type";
 
         private const string CODE_NAME_A = "A-EX";
         private const string CODE_NAME_B = "B-18.00%";
