@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RwandaVSDC.Models.Data
 {
-    public class CurrencyCodes
+    public static class CurrencyCodes
     {
         public static string CodeClassification = "33";
         public static string CodeClassificationName = "Currency";
