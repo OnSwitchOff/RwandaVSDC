@@ -32,15 +32,15 @@ namespace RwandaVSDC.Models.ValueObjects
         public string CodeName => _codeName;
         public string CodeDescription => _codeDescription;
 
-        public static UnitOfQuantityCodeValueObject Create(string packagingUnitCode)
+        public static UnitOfQuantityCodeValueObject Create(string unitOfQuantityCode)
         {
-            if (!UnitOfQuantityCodes.Codes.ContainsKey(packagingUnitCode))
+            if (!UnitOfQuantityCodes.Codes.ContainsKey(unitOfQuantityCode))
             {
-                throw new ArgumentException($"Invalid packaging unit code: {packagingUnitCode}");
+                throw new ArgumentException($"Invalid unit of quantity code: {unitOfQuantityCode}");
             }
 
-            CodeInfo unitOfQuantityCode = UnitOfQuantityCodes.Codes[packagingUnitCode];
-            return new UnitOfQuantityCodeValueObject(unitOfQuantityCode.Code, unitOfQuantityCode.SortOrder, unitOfQuantityCode.CodeName, unitOfQuantityCode.CodeDescription);
+            CodeInfo unitOfQuantityCodeInfo = UnitOfQuantityCodes.Codes[unitOfQuantityCode];
+            return new UnitOfQuantityCodeValueObject(unitOfQuantityCodeInfo.Code, unitOfQuantityCodeInfo.SortOrder, unitOfQuantityCodeInfo.CodeName, unitOfQuantityCodeInfo.CodeDescription);
         }
 
         protected override bool EqualsCore(UnitOfQuantityCodeValueObject other)

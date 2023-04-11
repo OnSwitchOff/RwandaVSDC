@@ -36,11 +36,11 @@ namespace RwandaVSDC.Models.ValueObjects
         {
             if (!CountryCodes.Codes.ContainsKey(countryCode))
             {
-                throw new ArgumentException($"Invalid packaging unit code: {countryCode}");
+                throw new ArgumentException($"Invalid country code: {countryCode}");
             }
 
-            CodeInfo unitOfQuantityCode = CountryCodes.Codes[countryCode];
-            return new CountryCodeValueObject(unitOfQuantityCode.Code, unitOfQuantityCode.SortOrder, unitOfQuantityCode.CodeName, unitOfQuantityCode.CodeDescription);
+            CodeInfo countryCodeInfo = CountryCodes.Codes[countryCode];
+            return new CountryCodeValueObject(countryCodeInfo.Code, countryCodeInfo.SortOrder, countryCodeInfo.CodeName, countryCodeInfo.CodeDescription);
 
         }
 
