@@ -36,7 +36,7 @@ namespace RwandaVSDC.Models.ValueObjects
                 throw new ArgumentException($"Invalid packaging unit code: {packagingUnitCode}");
             }
 
-            UnitOfQuantityCode unitOfQuantityCode = UnityOfQuantityCodes.Codes[packagingUnitCode];
+            CodeInfo unitOfQuantityCode = UnityOfQuantityCodes.Codes[packagingUnitCode];
             return new UnitOfQuantityCodeValueObject(unitOfQuantityCode.Code, unitOfQuantityCode.SortOrder, unitOfQuantityCode.CodeName, unitOfQuantityCode.CodeDescription);
         }
 
