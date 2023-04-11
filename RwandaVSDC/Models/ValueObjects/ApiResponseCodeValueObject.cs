@@ -35,7 +35,6 @@ namespace RwandaVSDC.Models.ValueObjects
 
             ApiResponseCodeInfo apiResponseCodeInfo = ApiResponseCodes.Codes[apiResponseCode];
             return new ApiResponseCodeValueObject(apiResponseCodeInfo.Code, apiResponseCodeInfo.System, apiResponseCodeInfo.Description);
-
         }
 
         protected override bool EqualsCore(ApiResponseCodeValueObject other)
