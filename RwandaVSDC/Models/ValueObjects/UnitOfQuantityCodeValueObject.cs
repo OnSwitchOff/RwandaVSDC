@@ -11,6 +11,9 @@ namespace RwandaVSDC.Models.ValueObjects
 {
     public class UnitOfQuantityCodeValueObject: ValueObject<UnitOfQuantityCodeValueObject>
     {
+        public static readonly string CodeClassification = UnitOfQuantityCodes.CodeClassification;
+        public static readonly string CodeClassificationName = UnitOfQuantityCodes.CodeClassificationName;
+
         private readonly string _code;
         private readonly int _sortOrder;
         private readonly string _codeName;
@@ -31,12 +34,12 @@ namespace RwandaVSDC.Models.ValueObjects
 
         public static UnitOfQuantityCodeValueObject Create(string packagingUnitCode)
         {
-            if (!UnityOfQuantityCodes.Codes.ContainsKey(packagingUnitCode))
+            if (!UnitOfQuantityCodes.Codes.ContainsKey(packagingUnitCode))
             {
                 throw new ArgumentException($"Invalid packaging unit code: {packagingUnitCode}");
             }
 
-            CodeInfo unitOfQuantityCode = UnityOfQuantityCodes.Codes[packagingUnitCode];
+            CodeInfo unitOfQuantityCode = UnitOfQuantityCodes.Codes[packagingUnitCode];
             return new UnitOfQuantityCodeValueObject(unitOfQuantityCode.Code, unitOfQuantityCode.SortOrder, unitOfQuantityCode.CodeName, unitOfQuantityCode.CodeDescription);
         }
 

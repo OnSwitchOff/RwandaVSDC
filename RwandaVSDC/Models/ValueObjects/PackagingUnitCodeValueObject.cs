@@ -11,8 +11,8 @@ namespace RwandaVSDC.Models.ValueObjects
 {
     internal class PackagingUnitCodeValueObject : ValueObject<PackagingUnitCodeValueObject>
     {
-        public static readonly string CodeClassification = "17";
-        public static readonly string CodeClassificationName = "Packaging Unit";
+        public static readonly string CodeClassification = PackagingUnitCodes.CodeClassification;
+        public static readonly string CodeClassificationName = PackagingUnitCodes.CodeClassificationName;
 
         private readonly string _code;
         private readonly int _sortOrder;

@@ -11,6 +11,9 @@ namespace RwandaVSDC.Models.ValueObjects
 {
     public class CountryCodeValueObject: ValueObject<CountryCodeValueObject>
     {
+        public static readonly string CodeClassification = CountryCodes.CodeClassification;
+        public static readonly string CodeClassificationName = CountryCodes.CodeClassificationName;
+
         private readonly string _code;
         private readonly int _sortOrder;
         private readonly string _codeName;

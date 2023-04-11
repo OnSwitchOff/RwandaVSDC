@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RwandaVSDC.Models.Data
 {
-    public static class UnityOfQuantityCodes
+    public static class UnitOfQuantityCodes
     {
         public static string CodeClassification = "10";
         public static string CodeClassificationName = "Unit of Quantity";
