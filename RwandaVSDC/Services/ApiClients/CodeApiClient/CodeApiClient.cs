@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RwandaVSDC.Services.ApiClient
+namespace RwandaVSDC.Services.ApiClients.CodeApiClient
 {
-    public class CodeApiClient: ICodeApiCLient
+    public class CodeApiClient : ICodeApiCLient
     {
         private readonly IApiService _apiService;
         private readonly IJsonSerializerService _jsonSerializer;
@@ -22,7 +22,7 @@ namespace RwandaVSDC.Services.ApiClient
 
         public async Task<CodeResponse?> SelectCodeAsync(CodeRequest codeRequest)
         {
-            var url = "http://example.com/users";
+            var url = "http://example.com/code/selectCodes";
 
             string request = _jsonSerializer.Serialize(codeRequest);
 
@@ -32,7 +32,6 @@ namespace RwandaVSDC.Services.ApiClient
             {
                 return _jsonSerializer.Deserialize<CodeResponse>(response.Data!);
             }
-
             return null;
         }
     }
