@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace RwandaVSDC.Services.ApiClients.CodeApiClient
 {
-    public class CodeApiClient : ICodeApiCLient
+    public class CodeApiClient : ICodeApiClient
     {
         private readonly IApiService _apiService;
         private readonly IJsonSerializerService _jsonSerializer;

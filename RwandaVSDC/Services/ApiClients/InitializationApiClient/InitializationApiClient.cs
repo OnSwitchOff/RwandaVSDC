@@ -34,6 +34,10 @@ namespace RwandaVSDC.Services.ApiClients.InitializationApiClient
             {
                 return _jsonSerializer.Deserialize<InitInfoResponse>(response.Data!);
             }
+            else
+            {
+                throw new Exception(response.ErrorMessage);
+            }
 
             return null;
         }
