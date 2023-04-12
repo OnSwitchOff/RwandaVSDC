@@ -7,6 +7,9 @@
         public SelectItemsClassViewModel SelectItemsClassViewModel { get; set; }
         public SelectCustomerViewModel SelectCustomerViewModel { get; set; }
         public SelectBranchesViewModel SelectBranchesViewModel { get; set; }
+        public SelectNoticesViewModel SelectNoticesViewModel { get; set; }
+        public SaveBrancheCustomersViewModel SaveBrancheCustomersViewModel { get; set; }
+        public SaveBrancheUsersViewModel SaveBrancheUsersViewModel { get; set; }
 
         public MainWindowViewModel()
         {
@@ -15,6 +18,9 @@
             SelectItemsClassViewModel = new SelectItemsClassViewModel();
             SelectCustomerViewModel = new SelectCustomerViewModel();
             SelectBranchesViewModel = new SelectBranchesViewModel();
+            SelectNoticesViewModel = new SelectNoticesViewModel();
+            SaveBrancheCustomersViewModel = new SaveBrancheCustomersViewModel();
+            SaveBrancheUsersViewModel = new SaveBrancheUsersViewModel();
         }
     }
 }

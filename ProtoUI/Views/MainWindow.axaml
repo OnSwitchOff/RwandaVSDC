@@ -226,6 +226,269 @@
 			</Grid>
 		</TabItem>
 
-		
+		<!--SelectNotices-->
+		<TabItem Header="SelectNotices" FontSize="16">
+			<Grid RowDefinitions="*,auto" ColumnDefinitions="*,*" DataContext="{Binding SelectNoticesViewModel}">
+				<!--Request-->
+				<Grid Grid.Column="0" Grid.Row="0" Background="LightGray">
+					<ScrollViewer Background="Transparent">
+						<StackPanel Orientation="Vertical" Background="Transparent">
+							<TextBlock Text="Search Notice Request" Margin="5" FontWeight="Bold"/>
+							<!--Tin-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="200"  Text="1. TIN" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding	Tin, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="TIN" Margin="5"/>
+							</StackPanel>
+							<!--Branch ID-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="200"  Text="2. Branch ID" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding	BranchId, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Branch ID" Margin="5"/>
+							</StackPanel>
+							<!--Last Request Date-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="200"  Text="3. Last Request Date" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding	LastRequestDate, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Last Request Date" Margin="5"/>
+							</StackPanel>
+						</StackPanel>
+					</ScrollViewer>
+				</Grid>
+				<!--Response-->
+				<Grid Grid.Column="1" Grid.Row="0" Background="LightBlue">
+					<ScrollViewer Background="Transparent">
+						<TextBox IsReadOnly="True" TextWrapping="Wrap" Text="{Binding Response, Mode=OneWay}"/>
+					</ScrollViewer>
+				</Grid>
+				<!--ButtonPanel-->
+				<Grid Grid.ColumnSpan="2" Grid.Row="1" Height="40" Background="Gray">
+					<Button Content="Send" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" Command="{Binding Send}"/>
+				</Grid>
+			</Grid>
+		</TabItem>
+
+		<!--SaveBrancheCustomers-->
+		<TabItem Header="SaveBrancheCustomers" FontSize="16">
+			<Grid RowDefinitions="*,auto" ColumnDefinitions="*,*" DataContext="{Binding SaveBrancheCustomersViewModel}">
+				<!--Request-->
+				<Grid Grid.Column="0" Grid.Row="0" Background="LightGray">
+					<ScrollViewer Background="Transparent">
+						<StackPanel Orientation="Vertical" Background="Transparent">
+							<TextBlock Text="Store branch customers Request" Margin="5" FontWeight="Bold"/>
+							<!--Tin-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="200"  Text="1. TIN" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding	Tin, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="TIN" Margin="5"/>
+							</StackPanel>
+							<!--Branch ID-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="200"  Text="2. Branch ID" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding	BranchId, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Branch ID" Margin="5"/>
+							</StackPanel>
+							<!--Customer Number-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="200"  Text="3. Customer Number" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding	CustomerNumber, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Customer Number" Margin="5"/>
+							</StackPanel>
+							<!--Customer Tin-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="200"  Text="4. Customer Tin" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding	CustomerTin, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Customer Tin" Margin="5"/>
+							</StackPanel>
+							<!--Customer Name-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="200"  Text="5. Customer Name" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding	CustomerName, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Customer Name" Margin="5"/>
+							</StackPanel>
+							<!--Address-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="200"  Text="5. Address" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding	Address, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Address" Margin="5"/>
+							</StackPanel>
+							<!--Contact-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="200"  Text="6. Contact" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding Contact, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Contact" Margin="5"/>
+							</StackPanel>
+							<!--Email-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="200"  Text="7. Email" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding Email, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Email" Margin="5"/>
+							</StackPanel>
+							<!--Fax Number-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="200"  Text="8. Fax Number" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding FaxNumber, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Fax Number" Margin="5"/>
+							</StackPanel>
+							<!--Used (Y/N)-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="200"  Text="9. Used (Y/N)" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding UsedYesNo, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Used (Y/N)" Margin="5"/>
+							</StackPanel>
+							<!--Remark-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="200"  Text="10. Remark" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding Remark, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Remark" Margin="5"/>
+							</StackPanel>
+							<!--Registrant Name-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="200"  Text="11. Registrant Name" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding RegistrantName, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Registrant Name" Margin="5"/>
+							</StackPanel>
+							<!--Registrant Id-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="200"  Text="12. Registrant ID" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding RegistrantId, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Registrant ID" Margin="5"/>
+							</StackPanel>
+							<!--Modifier Name-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="200"  Text="13. Modifier Name" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding ModifierName, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Modifier Name" Margin="5"/>
+							</StackPanel>
+							<!--Modifier Id-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="200"  Text="14. Modifier ID" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding ModifierId, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Modifier ID" Margin="5"/>
+							</StackPanel>
+						</StackPanel>
+					</ScrollViewer>
+				</Grid>
+				<!--Response-->
+				<Grid Grid.Column="1" Grid.Row="0" Background="LightBlue">
+					<ScrollViewer Background="Transparent">
+						<TextBox IsReadOnly="True" TextWrapping="Wrap" Text="{Binding Response, Mode=OneWay}"/>
+					</ScrollViewer>
+				</Grid>
+				<!--ButtonPanel-->
+				<Grid Grid.ColumnSpan="2" Grid.Row="1" Height="40" Background="Gray">
+					<Button Content="Send" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" Command="{Binding Send}"/>
+				</Grid>
+			</Grid>
+		</TabItem>
+
+		<!--SaveBrancheUsers-->
+		<TabItem Header="SaveBrancheUsers" FontSize="16">
+			<Grid RowDefinitions="*,auto" ColumnDefinitions="*,*" DataContext="{Binding SaveBrancheUsersViewModel}">
+				<!--Request-->
+				<Grid Grid.Column="0" Grid.Row="0" Background="LightGray">
+					<ScrollViewer Background="Transparent">
+						<StackPanel Orientation="Vertical" Background="Transparent">
+							<TextBlock Text="Save Branch User Request" Margin="5" FontWeight="Bold"/>
+							<!--Tin-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="200"  Text="1. TIN" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding	Tin, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="TIN" Margin="5"/>
+							</StackPanel>
+							<!--Branch ID-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="200"  Text="2. Branch ID" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding	BranchId, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Branch ID" Margin="5"/>
+							</StackPanel>
+							<!--User ID-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="200"  Text="3. User ID" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding	UserId, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="User ID" Margin="5"/>
+							</StackPanel>
+							<!--User Name-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="200"  Text="4. User Name" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding	UserName, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="User Name" Margin="5"/>
+							</StackPanel>
+							<!--Password-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="200"  Text="5. Password" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding	Password, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Password" Margin="5"/>
+							</StackPanel>
+							<!--Address-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="200"  Text="6. Address" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding	Address, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Address" Margin="5"/>
+							</StackPanel>
+							<!--Contact-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="200"  Text="7. Contact" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding	Contact, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Contact" Margin="5"/>
+							</StackPanel>
+							<!--Authority Code-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="200"  Text="8. Authority Code" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding	AuthorityCode, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Authority Code" Margin="5"/>
+							</StackPanel>
+							<!--Used (Y/N)-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="200"  Text="9. Used (Y/N)" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding UsedYesNo, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Used (Y/N)" Margin="5"/>
+							</StackPanel>
+							<!--Remark-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="200"  Text="10. Remark" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding Remark, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Remark" Margin="5"/>
+							</StackPanel>
+							<!--Registrant Name-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="200"  Text="11. Registrant Name" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding RegistrantName, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Registrant Name" Margin="5"/>
+							</StackPanel>
+							<!--Registrant Id-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="200"  Text="12. Registrant ID" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding RegistrantId, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Registrant ID" Margin="5"/>
+							</StackPanel>
+							<!--Modifier Name-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="200"  Text="13. Modifier Name" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding ModifierName, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Modifier Name" Margin="5"/>
+							</StackPanel>
+							<!--Modifier Id-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="200"  Text="14. Modifier ID" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding ModifierId, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Modifier ID" Margin="5"/>
+							</StackPanel>
+						</StackPanel>
+					</ScrollViewer>
+				</Grid>
+				<!--Response-->
+				<Grid Grid.Column="1" Grid.Row="0" Background="LightBlue">
+					<ScrollViewer Background="Transparent">
+						<TextBox IsReadOnly="True" TextWrapping="Wrap" Text="{Binding Response, Mode=OneWay}"/>
+					</ScrollViewer>
+				</Grid>
+				<!--ButtonPanel-->
+				<Grid Grid.ColumnSpan="2" Grid.Row="1" Height="40" Background="Gray">
+					<Button Content="Send" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" Command="{Binding Send}"/>
+				</Grid>
+			</Grid>
+		</TabItem>
+
 	</TabControl>
 </Window>
