@@ -1,6 +1,6 @@
 ﻿using RwandaVSDC.Models.JSON.Notices.SelectNotices;
 
-namespace RwandaVSDC.Services.ApiClients.Notices
+namespace RwandaVSDC.Services.ApiClients.NoticesApiClient
 {
     
     public interface INoticesApiClient

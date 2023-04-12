@@ -1,5 +1,6 @@
-﻿using RwandaVSDC.Models.JSON.ItemClass.SelectItemsClass;
-using RwandaVSDC.Models.JSON.Notices.SelectNotices;
+﻿using RwandaVSDC.Models.JSON.Items.SaveItems;
+using RwandaVSDC.Models.JSON.Items.SelectItems;
+using RwandaVSDC.Models.JSON.TransactionsSales.SaveSales;
 using RwandaVSDC.Services.ApiService;
 using RwandaVSDC.Services.JsonSerializer;
 using System;
@@ -8,22 +9,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RwandaVSDC.Services.ApiClients.Notices
+namespace RwandaVSDC.Services.ApiClients.TransactionsSaleApiClient
 {
-    public class NoticesApiClient : INoticesApiClient
+    public class TransactionsSaleApiClient : ITransactionsSaleApiClient
     {
         private readonly IApiService _apiService;
         private readonly IJsonSerializerService _jsonSerializer;
 
-        public NoticesApiClient(IApiService apiService, IJsonSerializerService jsonSerializer)
+        public TransactionsSaleApiClient(IApiService apiService, IJsonSerializerService jsonSerializer)
         {
             _apiService = apiService;
             _jsonSerializer = jsonSerializer;
         }
 
-        public async Task<NoticeResponse?> SelectNoticesAsync(NoticeRequest requestBody)
+        public async Task<SaveSalesResponse?> SaveSalesAsync(SaveSalesRequest requestBody)
         {
-            var url = "http://example.com/notices/selectNotices";
+            var url = "http://example.com/trnsSales/saveSales";
 
             string requestBodyString = _jsonSerializer.Serialize(requestBody);
 
@@ -31,7 +32,7 @@ namespace RwandaVSDC.Services.ApiClients.Notices
 
             if (response.Success == true)
             {
-                return _jsonSerializer.Deserialize<NoticeResponse>(response.Data!);
+                return _jsonSerializer.Deserialize<SaveSalesResponse>(response.Data!);
             }
 
             return null;

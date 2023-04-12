@@ -13,7 +13,7 @@ namespace RwandaVSDC.Models.JSON.TransactionsSales.SaveSales
     /// <summary>
     /// Save Sales Request
     /// </summary>
-    public class SaveSaleRequest
+    public class SaveSalesRequest
     {
         /// <summary>
         /// TIN
