@@ -57,5 +57,9 @@
 		<TabItem Header="SaveItems" FontSize="16">
 			<view:SaveItemsUserControl/>
 		</TabItem>
+		<!--SelectItems-->
+		<TabItem Header="SelectItems" FontSize="16">
+			<view:SelectItemsUserControl/>
+		</TabItem>
 	</TabControl>
 </Window>
