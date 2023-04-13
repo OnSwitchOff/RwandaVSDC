@@ -65,5 +65,9 @@
 		<TabItem Header="SelectImportItems" FontSize="16">
 			<view:SelectImportItemsUserControl/>
 		</TabItem>
+		<!--UpdateImportItems-->
+		<TabItem Header="UpdateImportItems" FontSize="16">
+			<view:UpdateImportItemsUserControl/>
+		</TabItem>
 	</TabControl>
 </Window>
