@@ -29,4 +29,10 @@
   <ItemGroup>
     <ProjectReference Include="..\RwandaVSDC\RwandaVSDC.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\InitializationUserControl.axaml.cs">
+      <DependentUpon>InitializationUserControl.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>
