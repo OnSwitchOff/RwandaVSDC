@@ -73,5 +73,9 @@
 		<TabItem Header="SaveSales" FontSize="16">
 			<view:SaveSalesUserControl/>
 		</TabItem>
+		<!--SelectTransactionsPurchaseSales-->
+		<TabItem Header="SelectTransactionsPurchaseSales" FontSize="16">
+			<view:SelectTransactionsPurchaseSalesUserControl/>
+		</TabItem>
 	</TabControl>
 </Window>
