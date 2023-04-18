@@ -89,5 +89,9 @@
 		<TabItem Header="SaveStockItems" FontSize="16">
 			<view:SaveStockItemsUserControl/>
 		</TabItem>
+		<!--SaveStockMaster-->
+		<TabItem Header="SaveStockMaster" FontSize="16">
+			<view:SaveStockMasterUserControl/>
+		</TabItem>
 	</TabControl>
 </Window>
