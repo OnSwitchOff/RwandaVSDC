@@ -69,5 +69,9 @@
 		<TabItem Header="UpdateImportItems" FontSize="16">
 			<view:UpdateImportItemsUserControl/>
 		</TabItem>
+		<!--SaveSales-->
+		<TabItem Header="SaveSales" FontSize="16">
+			<view:SaveSalesUserControl/>
+		</TabItem>
 	</TabControl>
 </Window>
