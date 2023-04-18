@@ -1,0 +1,281 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:vm="using:ProtoUI.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="ProtoUI.Views.SavePurchasesUserControl">
+	<UserControl.DataContext>
+		<vm:SavePurchasesViewModel/>
+	</UserControl.DataContext>
+	<Grid RowDefinitions="*,auto" ColumnDefinitions="*,*">
+		<!--Request-->
+		<Grid Grid.Column="0" Grid.Row="0" Background="LightGray">
+			<ScrollViewer Background="Transparent">
+				<StackPanel Orientation="Vertical" Background="Transparent">
+					<TextBlock Text="Save Purchases Request" Margin="5" FontWeight="Bold"/>
+					<!--Tin-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="1. TIN" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding	Tin, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="TIN" Margin="5"/>
+					</StackPanel>
+					<!--Branch ID-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="2. Branch ID" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding	BranchId, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Branch ID" Margin="5"/>
+					</StackPanel>
+					<!--Invoice Number-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="3. Invoice Number" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding	InvoiceNumber, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Invoice Number" Margin="5"/>
+					</StackPanel>
+					<!--Original Invoice Number-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="4. Original Invoice Number" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding	OriginalInvoiceNumber, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Original Invoice Number" Margin="5"/>
+					</StackPanel>
+					<!--Supplier Tin-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="5. Supplier Tin" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding	SupplierTin, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Supplier Tin" Margin="5"/>
+					</StackPanel>
+					<!--Supplier Branch Id-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="6. Supplier Branch Id" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding	SupplierBranchId, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Supplier Branch Id" Margin="5"/>
+					</StackPanel>
+					<!--Supplier Name-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="7. Supplier Name" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding	SupplierName, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Supplier Name" Margin="5"/>
+					</StackPanel>
+					<!--Supplier Invoice Number-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="8. Supplier Invoice Number" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding	SupplierInvoiceNumber, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Supplier Invoice Number" Margin="5"/>
+					</StackPanel>
+					<!--SupplierSdcId-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="9. SupplierSdcId" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding	SupplierSdcId, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="SupplierSdcId" Margin="5"/>
+					</StackPanel>
+					<!--Registration Type Code-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="10. Registration Type Code" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding	RegistrationTypeCode, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Registration Type Code" Margin="5"/>
+					</StackPanel>
+					<!--Purchase Type Code-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="11. Purchase Type Code" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding	PurchaseTypeCode, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Purchase Type Code" Margin="5"/>
+					</StackPanel>
+					<!--Receipt Type Code-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="12. Receipt Type Code" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding	ReceiptTypeCode, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Receipt Type Code" Margin="5"/>
+					</StackPanel>
+					<!--Payment Type Code-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="13. Payment Type Code" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding	PaymentTypeCode, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Payment Type Code" Margin="5"/>
+					</StackPanel>
+					<!--Purchase Status Code-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="12. Purchase Status Code" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding	PurchaseStatusCode, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Purchase Status Code" Margin="5"/>
+					</StackPanel>
+					<!--Validated Date-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="13. Validated Date" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding	ValidatedDate, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Validated Date" Margin="5"/>
+					</StackPanel>
+					<!--Purchase Date-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="14. Purchase Date" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding	PurchaseDate, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Purchase Date" Margin="5"/>
+					</StackPanel>
+					<!--Warehousing Date-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="15. Warehousing Date" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding	WarehousingDate, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Warehousing Date" Margin="5"/>
+					</StackPanel>
+					<!--Cancel Reqeuested Date-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="16. Cancel Reqeuested Date" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding	CancelReqeuestedDate, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Cancel Reqeuested Date" Margin="5"/>
+					</StackPanel>
+					<!--Canceled Date-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="17. Canceled Date" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding	CanceledDate, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Canceled Date" Margin="5"/>
+					</StackPanel>					
+					<!--Refunded Date-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="18. Refunded Date" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding	RefundedDate, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Refunded Date" Margin="5"/>
+					</StackPanel>
+					<!--Total Item Count-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="19. Total Item Count" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding	TotalItemCount, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Total Item Count" Margin="5"/>
+					</StackPanel>
+					<!--Taxable Amount A-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="20. Taxable Amount A" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding	TaxableAmountA, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Taxable Amount A" Margin="5"/>
+					</StackPanel>
+					<!--Taxable Amount B-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="21. Taxable Amount B" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding	TaxableAmountB, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Taxable Amount B" Margin="5"/>
+					</StackPanel>
+					<!--Taxable Amount C-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="22. Taxable Amount C" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding	TaxableAmountC, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Taxable Amount C" Margin="5"/>
+					</StackPanel>
+					<!--Taxable Amount D-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="23. Taxable Amount D" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding	TaxableAmountD, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Taxable Amount D" Margin="5"/>
+					</StackPanel>
+					<!--Tax Rate A-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="24. Taxable Rate A" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding	TaxRateA, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Taxable Rate A" Margin="5"/>
+					</StackPanel>
+					<!--Tax Rate B-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="25. Tax Rate B" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding	TaxRateB, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Tax Rate B" Margin="5"/>
+					</StackPanel>
+					<!--Tax Rate C-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="26. Tax Rate C" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding	TaxRateC, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Tax Rate C" Margin="5"/>
+					</StackPanel>
+					<!--Tax Rate D-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="27. Tax Rate D" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding	TaxRateD, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Tax Rate D" Margin="5"/>
+					</StackPanel>
+					<!--Tax Amount A-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="28. Tax Amount A" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding	TaxAmtA, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Tax Amount A" Margin="5"/>
+					</StackPanel>
+					<!--Tax Amount B-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="29. Tax Amount B" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding	TaxAmtB, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Tax Amount B" Margin="5"/>
+					</StackPanel>
+					<!--Tax Amount C-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="30. Tax Amount C" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding	TaxAmtC, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Tax Amount C" Margin="5"/>
+					</StackPanel>
+					<!--Tax Amount D-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="31. Tax Amount D" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding	TaxAmtD, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Tax Amount D" Margin="5"/>
+					</StackPanel>
+					<!--Total Taxable Amount-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="32. Total Taxable Amount" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding	TotalTaxableAmount, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Total Taxable Amount" Margin="5"/>
+					</StackPanel>
+					<!--Total Tax Amount-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="33. Total Tax Amount" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding	TotalTaxAmount, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Total Tax Amount" Margin="5"/>
+					</StackPanel>
+					<!--Total Amount-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="34. Total Amount" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding	TotalAmount, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Total Amount" Margin="5"/>
+					</StackPanel>
+					<!--Remark-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="35. Remark" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding	Remark, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Remark" Margin="5"/>
+					</StackPanel>
+					<!--Registrant Name-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="36. Registrant Name" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding RegistrantName, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Registrant Name" Margin="5"/>
+					</StackPanel>
+					<!--Registrant Id-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="37. Registrant ID" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding RegistrantId, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Registrant ID" Margin="5"/>
+					</StackPanel>
+					<!--Modifier Name-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="38. Modifier Name" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding ModifierName, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Modifier Name" Margin="5"/>
+					</StackPanel>
+					<!--Modifier Id-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="39. Modifier ID" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding ModifierId, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Modifier ID" Margin="5"/>
+					</StackPanel>				
+					<!--Items List-->
+					<TextBlock Text="40. Items List" Margin="5" FontWeight="Bold"/>
+					<DataGrid Items="{Binding ItemList}" AutoGenerateColumns="True" Background="White">
+					</DataGrid>
+				</StackPanel>
+			</ScrollViewer>
+		</Grid>
+		<!--Response-->
+		<Grid Grid.Column="1" Grid.Row="0" Background="LightBlue">
+			<ScrollViewer Background="Transparent">
+				<TextBox IsReadOnly="True" TextWrapping="Wrap" Text="{Binding Response, Mode=OneWay}"/>
+			</ScrollViewer>
+		</Grid>
+		<!--ButtonPanel-->
+		<Grid Grid.ColumnSpan="2" Grid.Row="1" Height="40" Background="Gray">
+			<Button Content="Send" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" Command="{Binding Send}"/>
+		</Grid>
+	</Grid>
+</UserControl>
