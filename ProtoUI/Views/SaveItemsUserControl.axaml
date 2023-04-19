@@ -3,7 +3,7 @@
 			 xmlns:vm="using:ProtoUI.ViewModels"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="1800" d:DesignHeight="450"
              x:Class="ProtoUI.Views.SaveItemsUserControl">
 	<UserControl.DataContext>
 		<vm:SaveItemsViewModel/>
@@ -26,7 +26,7 @@
 						<TextBox Width="150" Text="{Binding	BranchId, Mode=TwoWay}"/>
 						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Branch ID" Margin="5"/>
 					</StackPanel>
-					<!--ItemCode-->
+					<!--Item Code-->
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Width="200"  Text="3. Item Code" HorizontalAlignment="Left" VerticalAlignment="Center" />
 						<TextBox Width="150" Text="{Binding	ItemCode, Mode=TwoWay}"/>
@@ -41,7 +41,21 @@
 					<!--Item Type Code-->
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Width="200"  Text="5. Item Type Code" HorizontalAlignment="Left" VerticalAlignment="Center" />
-						<TextBox Width="150" Text="{Binding	ItemTypeCode, Mode=TwoWay}"/>
+						<AutoCompleteBox Width="150" Items="{Binding ProductTypes}"  SelectedItem="{Binding SelectedProductType}" ValueMemberBinding="{Binding CodeName}" Margin="0,0,5,0">
+							<AutoCompleteBox.ItemTemplate>
+								<DataTemplate>
+									<TextBlock Text="{Binding CodeName}" ToolTip.Tip="{Binding CodeDescription}"/>
+								</DataTemplate>
+							</AutoCompleteBox.ItemTemplate>
+						</AutoCompleteBox>
+						<ComboBox Width="150" Items="{Binding ProductTypes}" SelectedItem="{Binding SelectedProductType}" Margin="0,0,5,0">
+							<ComboBox.ItemTemplate>
+								<DataTemplate>
+									<TextBlock Text="{Binding CodeName}" ToolTip.Tip="{Binding CodeDescription}"/>
+								</DataTemplate>
+							</ComboBox.ItemTemplate>
+						</ComboBox>
+						<TextBox Text="{Binding	ItemTypeCode, Mode=TwoWay}" MinWidth="46" Width="46"/>
 						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Item Type Code" Margin="5"/>
 					</StackPanel>
 					<!--Item Name-->
@@ -59,7 +73,21 @@
 					<!--Origin Place Code-->
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Width="200"  Text="8. Origin Place Code" HorizontalAlignment="Left" VerticalAlignment="Center" />
-						<TextBox Width="150" Text="{Binding	OriginPlaceCode, Mode=TwoWay}"/>
+						<AutoCompleteBox Width="150" Items="{Binding Nations}"  SelectedItem="{Binding SelectedOriginPlace}" ValueMemberBinding="{Binding CodeName}" Margin="0,0,5,0">
+							<AutoCompleteBox.ItemTemplate>
+								<DataTemplate>
+									<TextBlock Text="{Binding CodeName}" ToolTip.Tip="{Binding CodeDescription}"/>
+								</DataTemplate>
+							</AutoCompleteBox.ItemTemplate>
+						</AutoCompleteBox>						
+						<ComboBox Width="150" Items="{Binding Nations}" SelectedItem="{Binding SelectedOriginPlace}" Margin="0,0,5,0">
+							<ComboBox.ItemTemplate>
+								<DataTemplate>
+									<TextBlock Text="{Binding CodeName}" ToolTip.Tip="{Binding CodeDescription}"/>
+								</DataTemplate>
+							</ComboBox.ItemTemplate>
+						</ComboBox>						
+						<TextBox Width="46" Text="{Binding	OriginPlaceCode, Mode=TwoWay}" IsReadOnly="True" MinWidth="46"/>
 						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Origin Place Code" Margin="5"/>
 					</StackPanel>
 					<!--Packaging Unit Code-->

@@ -1,4 +1,6 @@
 ﻿using ReactiveUI;
+using RwandaVSDC.Models.Data;
+using RwandaVSDC.Models.Enums;
 using RwandaVSDC.Services.ApiClients.BranchesApiClient;
 using RwandaVSDC.Services.ApiClients.ItemsApiClient;
 using RwandaVSDC.Services.ApiService;
@@ -22,9 +24,11 @@ namespace ProtoUI.ViewModels
         private string _itemCode = string.Empty;
         private string _itemClassificationCode = string.Empty;
         private string _itemTypeCode = string.Empty;
+        private CodeInfo? _selectedProductType = null;
         private string _itemName = string.Empty;
         private string _itemStandartName = string.Empty;
         private string _originPlaceCode = string.Empty;
+        private CodeInfo? _originPlace = null;
         private string _packagingUnitCode = string.Empty;
         private string _quantityUnitCode = string.Empty;
         private string _taxationTypeCode = string.Empty;
@@ -44,6 +48,7 @@ namespace ProtoUI.ViewModels
         private string _registrantId = string.Empty;
         private string _modifierName = string.Empty;
         private string _modifierId = string.Empty;
+
 
         private string _response = string.Empty;
 
@@ -75,13 +80,35 @@ namespace ProtoUI.ViewModels
         public string ModifierName { get => _modifierName; set => this.RaiseAndSetIfChanged(ref _modifierName, value); }
         public string ModifierId { get => _modifierId; set => this.RaiseAndSetIfChanged(ref _modifierId, value); }
         public string Response { get => _response; set => this.RaiseAndSetIfChanged(ref _response, value); }
+        public string InsuranceAppicableYesNo { get => _insuranceAppicableYesNo; set => this.RaiseAndSetIfChanged(ref _insuranceAppicableYesNo, value); }
 
-        public string InsuranceAppicableYesNo { get => _insuranceAppicableYesNo; set => _insuranceAppicableYesNo = value; }
+        public IReadOnlyList<CodeInfo> Nations { get; set; }
+        public CodeInfo? SelectedOriginPlace
+        { 
+            get => _originPlace;
+            set 
+            {
+                this.RaiseAndSetIfChanged(ref _originPlace, value);
+                OriginPlaceCode = _originPlace?.Code ?? string.Empty;
+            }
+        }
+        public IReadOnlyList<CodeInfo> ProductTypes { get; set; }
+        public CodeInfo? SelectedProductType
+        {
+            get => _selectedProductType;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _selectedProductType, value);
+                ItemTypeCode = _selectedProductType?.Code ?? string.Empty;
+            }
+        }
 
         public SaveItemsViewModel() : base()
         {
             _itemsApiClient = new ItemsApiClient(new HttpApiService(new HttpClient()), new JsonSerializerService());
             SendCommand = ReactiveCommand.Create(Send);
+            Nations = CountryCodes.Codes.Select( kv => kv.Value).ToList();
+            ProductTypes = ProductTypeCodes.Codes.Select(kv => kv.Value).ToList();
         }
 
         private async Task Send()
