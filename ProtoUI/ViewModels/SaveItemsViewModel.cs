@@ -32,6 +32,7 @@ namespace ProtoUI.ViewModels
         private string _packagingUnitCode = string.Empty;
         private CodeInfo? _selectedPackagingUnit = null;
         private string _quantityUnitCode = string.Empty;
+        private CodeInfo? _selectedUnitOfQuantityCode = null;
         private string _taxationTypeCode = string.Empty;
         private string _batchNumber = string.Empty;
         private string _barcode = string.Empty;
@@ -113,6 +114,16 @@ namespace ProtoUI.ViewModels
                 PackagingUnitCode = _selectedPackagingUnit?.Code ?? string.Empty;
             }
         }
+        public IReadOnlyList<CodeInfo> QuantityUnitCodes { get; set; }
+        public CodeInfo? SelectedUnitOfQuantityCode
+        {
+            get => _selectedUnitOfQuantityCode;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _selectedUnitOfQuantityCode, value);
+                QuantityUnitCode = _selectedUnitOfQuantityCode?.Code ?? string.Empty;
+            }
+        }
 
         public SaveItemsViewModel() : base()
         {
@@ -121,6 +132,7 @@ namespace ProtoUI.ViewModels
             Nations = CountryCodes.Codes.Select( kv => kv.Value).ToList();
             ProductTypes = ProductTypeCodes.Codes.Select(kv => kv.Value).ToList();
             PackagingUnits = PackagingUnitCodes.Codes.Select(kv => kv.Value).ToList();
+            QuantityUnitCodes = UnitOfQuantityCodes.Codes.Select(kv => kv.Value).ToList();
         }
 
         private async Task Send()
