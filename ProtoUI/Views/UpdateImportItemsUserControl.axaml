@@ -65,7 +65,21 @@
 					<!--Import Item Status Code-->
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Width="200" Text="9. Import Item Status Code" HorizontalAlignment="Left" VerticalAlignment="Center" />
-						<TextBox Width="150" Text="{Binding	ImportItemStatusCode, Mode=TwoWay}"/>
+						<AutoCompleteBox Width="150" Items="{Binding ImportItemStatuses}"  SelectedItem="{Binding SelectedImportItemStatus}" ValueMemberBinding="{Binding CodeName}" Margin="0,0,5,0">
+							<AutoCompleteBox.ItemTemplate>
+								<DataTemplate>
+									<TextBlock Text="{Binding CodeName}" ToolTip.Tip="{Binding CodeDescription}"/>
+								</DataTemplate>
+							</AutoCompleteBox.ItemTemplate>
+						</AutoCompleteBox>
+						<ComboBox Width="150" Items="{Binding ImportItemStatuses}" SelectedItem="{Binding SelectedImportItemStatus}" Margin="0,0,5,0">
+							<ComboBox.ItemTemplate>
+								<DataTemplate>
+									<TextBlock Text="{Binding CodeName}" ToolTip.Tip="{Binding CodeDescription}"/>
+								</DataTemplate>
+							</ComboBox.ItemTemplate>
+						</ComboBox>
+						<TextBox Text="{Binding	ImportItemStatusCode, Mode=TwoWay}" Width="100" IsReadOnly="True"/>
 						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Import Item Status Code" Margin="5"/>
 					</StackPanel>
 					<!--Remark-->

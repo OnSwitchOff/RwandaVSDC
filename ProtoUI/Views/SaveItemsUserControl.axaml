@@ -55,7 +55,7 @@
 								</DataTemplate>
 							</ComboBox.ItemTemplate>
 						</ComboBox>
-						<TextBox Text="{Binding	ItemTypeCode, Mode=TwoWay}" MinWidth="46" Width="46"/>
+						<TextBox Text="{Binding	ItemTypeCode, Mode=TwoWay}" MinWidth="46" Width="46" IsReadOnly="True"/>
 						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Item Type Code" Margin="5"/>
 					</StackPanel>
 					<!--Item Name-->

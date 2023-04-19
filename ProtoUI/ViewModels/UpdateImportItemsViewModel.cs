@@ -1,4 +1,5 @@
 ﻿using ReactiveUI;
+using RwandaVSDC.Models.Data;
 using RwandaVSDC.Services.ApiClients.ImportsApiClient;
 using RwandaVSDC.Services.ApiService;
 using RwandaVSDC.Services.JsonSerializer;
@@ -24,6 +25,7 @@ namespace ProtoUI.ViewModels
         private string _itemClassificationCode = string.Empty;
         private string _itemCode = string.Empty;
         private string _importItemStatusCode = string.Empty;
+        public CodeInfo? _selectedImportItemStatus = null;
         private string _remark = string.Empty;
         private string _modifierName = string.Empty;
         private string _modifierId = string.Empty;
@@ -56,12 +58,22 @@ namespace ProtoUI.ViewModels
             get => _response;
             set => this.RaiseAndSetIfChanged(ref _response, value);
         }
-        
+        public IReadOnlyList<CodeInfo> ImportItemStatuses { get; set; }
+        public CodeInfo? SelectedImportItemStatus
+        {
+            get => _selectedImportItemStatus;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _selectedImportItemStatus, value);
+                ImportItemStatusCode = _selectedImportItemStatus?.Code ?? string.Empty;
+            }
+        }
 
         public UpdateImportItemsViewModel() : base()
         {
             _importsClassApiClient = new ImportsApiClient(new HttpApiService(new HttpClient()), new JsonSerializerService());
             SendCommand = ReactiveCommand.Create(Send);
+            ImportItemStatuses = ImportItemsStatusCodes.Codes.Select(kv => kv.Value).ToList();
         }
 
         private async Task Send()
