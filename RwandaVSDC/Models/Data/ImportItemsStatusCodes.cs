@@ -17,10 +17,10 @@ namespace RwandaVSDC.Models.Data
         {
             return new Dictionary<ImportItemStatus, CodeInfo>()
             {
-                { ImportItemStatus.Unsent, new CodeInfo("Unsent", 1, "Unsent", "") },
-                { ImportItemStatus.Waiting, new CodeInfo("Waiting", 2, "Waiting", "") },
-                { ImportItemStatus.Approved, new CodeInfo("Approved", 3, "Approved", "") },
-                { ImportItemStatus.Cancelled, new CodeInfo("Cancelled", 4, "Cancelled", "") }
+                { ImportItemStatus.Unsent, new CodeInfo("1", 1, "Unsent", "") },
+                { ImportItemStatus.Waiting, new CodeInfo("2", 2, "Waiting", "") },
+                { ImportItemStatus.Approved, new CodeInfo("3", 3, "Approved", "") },
+                { ImportItemStatus.Cancelled, new CodeInfo("4", 4, "Cancelled", "") }
             };
         }
     }

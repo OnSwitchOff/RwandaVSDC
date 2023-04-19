@@ -51,13 +51,13 @@ namespace RwandaVSDC.Models.ValueObjects
             switch (importItemStatus)
             {
                 case ImportItemStatus.Unsent:
-                    return new ImportItemStatusValueObject(importItemStatus.ToString(), (int)importItemStatus, CODE_NAME_1, CODE_DESCRIPTION_1);
+                    return new ImportItemStatusValueObject("1", (int)importItemStatus, CODE_NAME_1, CODE_DESCRIPTION_1);
                 case ImportItemStatus.Waiting:
-                    return new ImportItemStatusValueObject(importItemStatus.ToString(), (int)importItemStatus, CODE_NAME_2, CODE_DESCRIPTION_2);
+                    return new ImportItemStatusValueObject("2", (int)importItemStatus, CODE_NAME_2, CODE_DESCRIPTION_2);
                 case ImportItemStatus.Approved:
-                    return new ImportItemStatusValueObject(importItemStatus.ToString(), (int)importItemStatus, CODE_NAME_3, CODE_DESCRIPTION_3);
+                    return new ImportItemStatusValueObject("3", (int)importItemStatus, CODE_NAME_3, CODE_DESCRIPTION_3);
                 case ImportItemStatus.Cancelled:
-                    return new ImportItemStatusValueObject(importItemStatus.ToString(), (int)importItemStatus, CODE_NAME_4, CODE_DESCRIPTION_4);
+                    return new ImportItemStatusValueObject("4", (int)importItemStatus, CODE_NAME_4, CODE_DESCRIPTION_4);
                 default:
                     throw new ArgumentOutOfRangeException();
             }
