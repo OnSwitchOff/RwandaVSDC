@@ -29,7 +29,7 @@
 					<!--Item Code-->
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Width="200"  Text="3. Item Code" HorizontalAlignment="Left" VerticalAlignment="Center" />
-						<TextBox Width="150" Text="{Binding	ItemCode, Mode=TwoWay}"/>
+						<TextBox Width="150" Text="{Binding	ItemCode, Mode=TwoWay}" IsReadOnly="True"/>
 						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Item Code" Margin="5"/>
 					</StackPanel>
 					<!--Item Classification Code-->
@@ -133,7 +133,21 @@
 					<!--Taxation Type Code-->
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Width="200"  Text="11. Taxation Type Code" HorizontalAlignment="Left" VerticalAlignment="Center" />
-						<TextBox Width="150" Text="{Binding	TaxationTypeCode, Mode=TwoWay}"/>
+						<AutoCompleteBox Width="150" Items="{Binding TaxTypes}"  SelectedItem="{Binding SelectedTaxType}" ValueMemberBinding="{Binding CodeName}" Margin="0,0,5,0">
+							<AutoCompleteBox.ItemTemplate>
+								<DataTemplate>
+									<TextBlock Text="{Binding CodeName}" ToolTip.Tip="{Binding CodeDescription}"/>
+								</DataTemplate>
+							</AutoCompleteBox.ItemTemplate>
+						</AutoCompleteBox>
+						<ComboBox Width="150" Items="{Binding TaxTypes}" SelectedItem="{Binding SelectedTaxType}" Margin="0,0,5,0">
+							<ComboBox.ItemTemplate>
+								<DataTemplate>
+									<TextBlock Text="{Binding CodeName}" ToolTip.Tip="{Binding CodeDescription}"/>
+								</DataTemplate>
+							</ComboBox.ItemTemplate>
+						</ComboBox>
+						<TextBox Text="{Binding	TaxationTypeCode, Mode=TwoWay}" MinWidth="46" Width="46" IsReadOnly="True"/>
 						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Taxation Type Code" Margin="5"/>
 					</StackPanel>
 					<!--Batch Number-->

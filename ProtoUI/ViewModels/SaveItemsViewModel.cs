@@ -4,6 +4,7 @@ using RwandaVSDC.Models.Enums;
 using RwandaVSDC.Services.ApiClients.BranchesApiClient;
 using RwandaVSDC.Services.ApiClients.ItemsApiClient;
 using RwandaVSDC.Services.ApiService;
+using RwandaVSDC.Services.ItemCodeBuilder;
 using RwandaVSDC.Services.JsonSerializer;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,7 @@ namespace ProtoUI.ViewModels
         private string _quantityUnitCode = string.Empty;
         private CodeInfo? _selectedUnitOfQuantityCode = null;
         private string _taxationTypeCode = string.Empty;
+        private CodeInfo? _selectedTaxType = null;
         private string _batchNumber = string.Empty;
         private string _barcode = string.Empty;
         private string _defaultUnitPrice = string.Empty;
@@ -92,6 +94,7 @@ namespace ProtoUI.ViewModels
             {
                 this.RaiseAndSetIfChanged(ref _originPlace, value);
                 OriginPlaceCode = _originPlace?.Code ?? string.Empty;
+                RefreshItemCode();
             }
         }
         public IReadOnlyList<CodeInfo> ProductTypes { get; set; }
@@ -102,6 +105,7 @@ namespace ProtoUI.ViewModels
             {
                 this.RaiseAndSetIfChanged(ref _selectedProductType, value);
                 ItemTypeCode = _selectedProductType?.Code ?? string.Empty;
+                RefreshItemCode();
             }
         }
         public IReadOnlyList<CodeInfo> PackagingUnits { get; set; }
@@ -112,6 +116,7 @@ namespace ProtoUI.ViewModels
             {
                 this.RaiseAndSetIfChanged(ref _selectedPackagingUnit, value);
                 PackagingUnitCode = _selectedPackagingUnit?.Code ?? string.Empty;
+                RefreshItemCode();
             }
         }
         public IReadOnlyList<CodeInfo> QuantityUnitCodes { get; set; }
@@ -122,6 +127,17 @@ namespace ProtoUI.ViewModels
             {
                 this.RaiseAndSetIfChanged(ref _selectedUnitOfQuantityCode, value);
                 QuantityUnitCode = _selectedUnitOfQuantityCode?.Code ?? string.Empty;
+                RefreshItemCode();
+            }
+        }
+        public IReadOnlyList<CodeInfo> TaxTypes { get; set; }
+        public CodeInfo? SelectedTaxType
+        {
+            get => _selectedTaxType;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _selectedTaxType, value);
+                TaxationTypeCode = _selectedTaxType?.Code ?? string.Empty;
             }
         }
 
@@ -133,6 +149,7 @@ namespace ProtoUI.ViewModels
             ProductTypes = ProductTypeCodes.Codes.Select(kv => kv.Value).ToList();
             PackagingUnits = PackagingUnitCodes.Codes.Select(kv => kv.Value).ToList();
             QuantityUnitCodes = UnitOfQuantityCodes.Codes.Select(kv => kv.Value).ToList();
+            TaxTypes = TaxTypeCodes.Codes.Select(kv => kv.Value).ToList();
         }
 
         private async Task Send()
@@ -147,6 +164,32 @@ namespace ProtoUI.ViewModels
             {
                 Response = e.Message;
             }
+        }
+
+        private void RefreshItemCode()
+        {
+            if (string.IsNullOrEmpty(OriginPlaceCode))
+            {
+                ItemCode = string.Empty;
+                return;
+            }
+            if (string.IsNullOrEmpty(ItemTypeCode))
+            {
+                ItemCode = string.Empty;
+                return;
+            }
+            if (string.IsNullOrEmpty(PackagingUnitCode))
+            {
+                ItemCode = string.Empty;
+                return;
+            }
+            if (string.IsNullOrEmpty(QuantityUnitCode))
+            {
+                ItemCode = string.Empty;
+                return;
+            }
+
+            ItemCode = new ItemCodeBuilder().CreateItemCode(OriginPlaceCode, ItemTypeCode, PackagingUnitCode, QuantityUnitCode);
         }
     }
 }
