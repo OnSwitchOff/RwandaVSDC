@@ -17,6 +17,7 @@ namespace ProtoUI.ViewModels
     public class SelectCodesViewModel : ViewModelBase
     {
         private readonly ICodeApiClient _codeApiClient;
+        private readonly IJsonSerializerService _jsonSerializer;
 
         private string _tin = string.Empty;
         private string _branchId = string.Empty;
@@ -51,6 +52,7 @@ namespace ProtoUI.ViewModels
         public SelectCodesViewModel() : base()
         {
             _codeApiClient = new CodeApiClient(new HttpApiService(new HttpClient()), new JsonSerializerService());
+            _jsonSerializer = new JsonSerializerService();
             SendCommand = ReactiveCommand.Create(Send);
         }
 
@@ -60,7 +62,11 @@ namespace ProtoUI.ViewModels
             {
                 Response = "Request sending..";
                 await Task.Delay(1000);
-                throw new NotImplementedException();
+                var response = await _codeApiClient.SelectCodeAsync(new RwandaVSDC.Models.JSON.Code.SelectCodes.CodeRequest()
+                {
+                    Tin = Tin, BranchId = BranchId, LastRequestDate = LastRequestDate
+                });
+                Response = _jsonSerializer.Serialize(response) ?? "NullResponse";
             }
             catch (Exception e)
             {

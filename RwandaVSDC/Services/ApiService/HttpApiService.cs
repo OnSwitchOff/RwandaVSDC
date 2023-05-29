@@ -43,7 +43,7 @@ namespace RwandaVSDC.Services.ApiService
 
         public async Task<ApiResult<string>> PostSomeDataAsync(string apiUrl, string data)
         {
-            HttpContent httpContent = new StringContent(data);
+            HttpContent httpContent = new StringContent(data,Encoding.UTF8,"application/json");
             HttpResponseMessage response = await _httpClient.PostAsync(apiUrl, httpContent);
 
             string responseData = await response.Content.ReadAsStringAsync();

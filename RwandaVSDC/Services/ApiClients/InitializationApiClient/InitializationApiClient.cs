@@ -15,16 +15,18 @@ namespace RwandaVSDC.Services.ApiClients.InitializationApiClient
     {
         private readonly IApiService _apiService;
         private readonly IJsonSerializerService _jsonSerializer;
+        private readonly string _baseUrl;
 
-        public InitializationApiClient(IApiService apiService, IJsonSerializerService jsonSerializer)
+        public InitializationApiClient(IApiService apiService, IJsonSerializerService jsonSerializer, string baseURL = "http://localhost:8081/rraVsdc_v1")
         {
             _apiService = apiService;
             _jsonSerializer = jsonSerializer;
+            _baseUrl = baseURL;
         }
 
         public async Task<InitInfoResponse?> SelectInitInfoAsync(InitInfoRequest requestBody)
         {
-            var url = "http://example.com/initializer/selectInitInfo";
+            var url = $"{_baseUrl}/initializer/selectInitInfo";
 
             string requestBodyString = _jsonSerializer.Serialize(requestBody);
 

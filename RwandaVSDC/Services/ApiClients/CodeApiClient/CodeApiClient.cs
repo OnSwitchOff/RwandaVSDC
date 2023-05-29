@@ -13,16 +13,18 @@ namespace RwandaVSDC.Services.ApiClients.CodeApiClient
     {
         private readonly IApiService _apiService;
         private readonly IJsonSerializerService _jsonSerializer;
+        private readonly string _baseUrl;
 
-        public CodeApiClient(IApiService apiService, IJsonSerializerService jsonSerializer)
+        public CodeApiClient(IApiService apiService, IJsonSerializerService jsonSerializer, string baseURL = "http://localhost:8081/rraVsdc_v1")
         {
             _apiService = apiService;
             _jsonSerializer = jsonSerializer;
+            _baseUrl = baseURL;
         }
 
         public async Task<CodeResponse?> SelectCodeAsync(CodeRequest codeRequest)
         {
-            var url = "http://example.com/code/selectCodes";
+            var url = $"{_baseUrl}/code/selectCodes";
 
             string request = _jsonSerializer.Serialize(codeRequest);
 
@@ -32,6 +34,11 @@ namespace RwandaVSDC.Services.ApiClients.CodeApiClient
             {
                 return _jsonSerializer.Deserialize<CodeResponse>(response.Data!);
             }
+            else
+            {
+                throw new Exception(response.ErrorMessage);
+            }
+
             return null;
         }
     }

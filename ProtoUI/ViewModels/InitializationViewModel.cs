@@ -62,7 +62,12 @@ namespace ProtoUI.ViewModels
                     BranchId = _branchId,
                     DvcSrlNo = _deviceSerialNumber
                 });
-                Response = response?.ToString() ?? "NullResponse";
+
+                Response = response is null ?
+                    "NullResponse" : 
+                    $"ResultDate:{response?.ResultDate}\n" +
+                    $"ResultCode:{response?.ResultCode}\n" +
+                    $"ResultMessage:{response?.ResultMessage}\n";
             }
             catch (Exception e)
             {
