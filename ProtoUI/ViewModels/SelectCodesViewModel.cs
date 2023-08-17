@@ -61,7 +61,6 @@ namespace ProtoUI.ViewModels
             try
             {
                 Response = "Request sending..";
-                await Task.Delay(1000);
                 var response = await _codeApiClient.SelectCodeAsync(new RwandaVSDC.Models.JSON.Code.SelectCodes.CodeRequest()
                 {
                     Tin = Tin, BranchId = BranchId, LastRequestDate = LastRequestDate

@@ -17,16 +17,18 @@ namespace RwandaVSDC.Services.ApiClients.BranchesApiClient
     {
         private readonly IApiService _apiService;
         private readonly IJsonSerializerService _jsonSerializer;
+        private readonly string _baseUrl;
 
-        public BranchesApiClient(IApiService apiService, IJsonSerializerService jsonSerializer)
+        public BranchesApiClient(IApiService apiService, IJsonSerializerService jsonSerializer, string baseURL = "http://26.211.186.14:8080/rraVsdc_v1TestLatest/")
         {
             _apiService = apiService;
             _jsonSerializer = jsonSerializer;
+            _baseUrl = baseURL;
         }
 
         public async Task<BranchResponse?> SelectBranchesAsync(BranchRequest requestBody)
         {
-            var url = "http://example.com/branches/selectBranches";
+            var url = $"{_baseUrl}/branches/selectBranches";
 
             string requestBodyString = _jsonSerializer.Serialize(requestBody);
 
