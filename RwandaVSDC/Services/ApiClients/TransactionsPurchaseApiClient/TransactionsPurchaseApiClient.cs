@@ -16,16 +16,18 @@ namespace RwandaVSDC.Services.ApiClients.TransactionsPurchaseApiClient
     {
         private readonly IApiService _apiService;
         private readonly IJsonSerializerService _jsonSerializer;
+        private readonly string _baseUrl;
 
-        public TransactionsPurchaseApiClient(IApiService apiService, IJsonSerializerService jsonSerializer)
+        public TransactionsPurchaseApiClient(IApiService apiService, IJsonSerializerService jsonSerializer, string baseURL = "http://26.211.186.14:8080/rraVsdc_v1TestLatest/")
         {
             _apiService = apiService;
             _jsonSerializer = jsonSerializer;
+            _baseUrl = baseURL;
         }
 
         public async Task<TransactionsPurchaseSalesResponse?> SelectTransactionsPurchaseSalesAsync(TransactionsPurchaseSalesRequest requestBody)
         {
-            var url = "http://example.com/trnsSales/saveSales";
+            var url = $"{_baseUrl}/trnsSales/saveSales";
 
             string requestBodyString = _jsonSerializer.Serialize(requestBody);
 

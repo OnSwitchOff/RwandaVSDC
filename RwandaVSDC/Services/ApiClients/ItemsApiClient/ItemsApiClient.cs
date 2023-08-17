@@ -15,16 +15,18 @@ namespace RwandaVSDC.Services.ApiClients.ItemsApiClient
     {
         private readonly IApiService _apiService;
         private readonly IJsonSerializerService _jsonSerializer;
+        private readonly string _baseUrl;
 
-        public ItemsApiClient(IApiService apiService, IJsonSerializerService jsonSerializer)
+        public ItemsApiClient(IApiService apiService, IJsonSerializerService jsonSerializer, string baseURL = "http://26.211.186.14:8080/rraVsdc_v1TestLatest/")
         {
             _apiService = apiService;
             _jsonSerializer = jsonSerializer;
+            _baseUrl = baseURL;
         }
 
         public async Task<ItemResponse?> SelectItemsAsync(ItemRequest requestBody)
         {
-            var url = "http://example.com/items/selectItems";
+            var url = $"{_baseUrl}/items/selectItems";
 
             string requestBodyString = _jsonSerializer.Serialize(requestBody);
 

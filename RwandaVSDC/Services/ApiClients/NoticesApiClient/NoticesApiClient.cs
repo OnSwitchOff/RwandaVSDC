@@ -14,16 +14,18 @@ namespace RwandaVSDC.Services.ApiClients.NoticesApiClient
     {
         private readonly IApiService _apiService;
         private readonly IJsonSerializerService _jsonSerializer;
+        private readonly string _baseUrl;
 
-        public NoticesApiClient(IApiService apiService, IJsonSerializerService jsonSerializer)
+        public NoticesApiClient(IApiService apiService, IJsonSerializerService jsonSerializer, string baseURL = "http://26.211.186.14:8080/rraVsdc_v1TestLatest/")
         {
             _apiService = apiService;
             _jsonSerializer = jsonSerializer;
+            _baseUrl = baseURL;
         }
 
         public async Task<NoticeResponse?> SelectNoticesAsync(NoticeRequest requestBody)
         {
-            var url = "http://example.com/notices/selectNotices";
+            var url = $"{_baseUrl}/notices/selectNotices";
 
             string requestBodyString = _jsonSerializer.Serialize(requestBody);
 

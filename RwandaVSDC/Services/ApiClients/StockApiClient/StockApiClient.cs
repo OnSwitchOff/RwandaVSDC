@@ -17,16 +17,18 @@ namespace RwandaVSDC.Services.ApiClients.StockApiClient
     {
         private readonly IApiService _apiService;
         private readonly IJsonSerializerService _jsonSerializer;
+        private readonly string _baseUrl;
 
-        public StockApiClient(IApiService apiService, IJsonSerializerService jsonSerializer)
+        public StockApiClient(IApiService apiService, IJsonSerializerService jsonSerializer, string baseURL = "http://26.211.186.14:8080/rraVsdc_v1TestLatest/")
         {
             _apiService = apiService;
             _jsonSerializer = jsonSerializer;
+            _baseUrl = baseURL;
         }
 
         public async Task<StockMovementResponse?> SelectStockItemsAsync(StockMovementRequest requestBody)
         {
-            var url = "http://example.com/stock/selectStockItems";
+            var url = $"{_baseUrl}/stock/selectStockItems";
 
             string requestBodyString = _jsonSerializer.Serialize(requestBody);
 
