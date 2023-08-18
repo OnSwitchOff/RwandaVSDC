@@ -15,10 +15,11 @@ namespace ProtoUI.ViewModels
     public class SelectStockItemsViewModel: ViewModelBase
     {
         private readonly IStockApiClient _stockApiClient;
+        private readonly IJsonSerializerService _jsonSerializer;
 
-        private string _tin = string.Empty;
-        private string _branchId = string.Empty;
-        private string _lastRequestDate = string.Empty;
+        private string _tin = SD.TIN;
+        private string _branchId = SD.BranchID;
+        private string _lastRequestDate = SD.LastRequestDate;
         private string _response = string.Empty;
 
         public IReactiveCommand SendCommand { get; }
@@ -49,6 +50,7 @@ namespace ProtoUI.ViewModels
         public SelectStockItemsViewModel() : base()
         {
             _stockApiClient = new StockApiClient(new HttpApiService(new HttpClient()), new JsonSerializerService());
+            _jsonSerializer = new JsonSerializerService();
             SendCommand = ReactiveCommand.Create(Send);
         }
 
@@ -57,8 +59,15 @@ namespace ProtoUI.ViewModels
             try
             {
                 Response = "Request sending..";
-                await Task.Delay(1000);
-                throw new NotImplementedException();
+                var response = await _stockApiClient.SelectStockItemsAsync(new RwandaVSDC.Models.JSON.Stock.SelectStockItems.StockMovementRequest()
+                {
+                    BranchId = BranchId,
+                    LastRequestDate = LastRequestDate,
+                    Tin = Tin
+                });
+
+                Response = _jsonSerializer.Serialize(response) ?? "NullResponse";
+                SD.LastRequestDate = response?.ResultDate ?? DateTime.Now.ToString("yyyyMMddHHmmss");
             }
             catch (Exception e)
             {

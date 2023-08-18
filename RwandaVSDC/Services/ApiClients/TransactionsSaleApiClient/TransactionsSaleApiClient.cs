@@ -26,7 +26,7 @@ namespace RwandaVSDC.Services.ApiClients.TransactionsSaleApiClient
 
         public async Task<SaveSalesResponse?> SaveSalesAsync(SaveSalesRequest requestBody)
         {
-            var url = $"{_baseUrl}/trnsSales/saveSales";
+            var url = $"{_baseUrl}trnsSales/saveSales";
 
             string requestBodyString = _jsonSerializer.Serialize(requestBody);
 

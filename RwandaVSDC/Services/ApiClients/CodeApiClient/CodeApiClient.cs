@@ -24,7 +24,7 @@ namespace RwandaVSDC.Services.ApiClients.CodeApiClient
 
         public async Task<CodeResponse?> SelectCodeAsync(CodeRequest codeRequest)
         {
-            var url = $"{_baseUrl}/code/selectCodes";
+            var url = $"{_baseUrl}code/selectCodes";
 
             string request = _jsonSerializer.Serialize(codeRequest);
 

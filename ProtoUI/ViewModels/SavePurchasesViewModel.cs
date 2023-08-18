@@ -1,4 +1,5 @@
-﻿using ReactiveUI;
+﻿using DynamicData;
+using ReactiveUI;
 using RwandaVSDC.Services.ApiClients.TransactionsPurchaseApiClient;
 using RwandaVSDC.Services.ApiClients.TransactionsSaleApiClient;
 using RwandaVSDC.Services.ApiService;
@@ -17,6 +18,7 @@ namespace ProtoUI.ViewModels
     public class SavePurchasesViewModel: ViewModelBase
     {
         private readonly ITransactionsPurchaseApiClient _transactionsPurchaseApiClient;
+        private readonly IJsonSerializerService _jsonSerializer;
 
         private string _tin = string.Empty;
         private string _branchId = string.Empty;
@@ -59,16 +61,14 @@ namespace ProtoUI.ViewModels
         private string _registrantId = string.Empty;
         private string _modifierName = string.Empty;
         private string _modifierId = string.Empty;
+        private SavePurchasesItemInfoViewModel? _selectedItem = null;
 
-        private ObservableCollection<SavePurchasesItemInfoViewModel> _itemList = new ObservableCollection<SavePurchasesItemInfoViewModel>()
-        {
-            new SavePurchasesItemInfoViewModel(),
-            new SavePurchasesItemInfoViewModel(),
-            new SavePurchasesItemInfoViewModel()
-        };
+        private ObservableCollection<SavePurchasesItemInfoViewModel> _itemList = new ObservableCollection<SavePurchasesItemInfoViewModel>();
 
         private string _response = string.Empty;
         public IReactiveCommand SendCommand { get; }
+        public IReactiveCommand AddItemCommand { get; }
+        public IReactiveCommand RemoveItemCommand { get; }
         public string Response { get => _response; set => this.RaiseAndSetIfChanged(ref _response, value); }
         public string Tin { get => _tin; set => this.RaiseAndSetIfChanged(ref _tin, value); }
         public string BranchId { get => _branchId; set => this.RaiseAndSetIfChanged(ref _branchId, value); }
@@ -112,20 +112,39 @@ namespace ProtoUI.ViewModels
         public string ModifierName { get => _modifierName; set => this.RaiseAndSetIfChanged(ref _modifierName, value); }
         public string ModifierId { get => _modifierId; set => this.RaiseAndSetIfChanged(ref _modifierId, value); }
         public ObservableCollection<SavePurchasesItemInfoViewModel> ItemList { get => _itemList; set => this.RaiseAndSetIfChanged(ref _itemList, value); }
+        public SavePurchasesItemInfoViewModel? SelectedItem { get => _selectedItem; set => this.RaiseAndSetIfChanged(ref _selectedItem, value); }
 
         public SavePurchasesViewModel() : base()
         {
             _transactionsPurchaseApiClient = new TransactionsPurchaseApiClient(new HttpApiService(new HttpClient()), new JsonSerializerService());
+            _jsonSerializer = new JsonSerializerService();
             SendCommand = ReactiveCommand.Create(Send);
+            AddItemCommand = ReactiveCommand.Create(AddItem);
+            RemoveItemCommand = ReactiveCommand.Create(RemoveItem);
         }
+        private void RemoveItem()
+        {
+            if (SelectedItem is not null)
+            {
+                ItemList.Remove(SelectedItem);
+            }
+        }
+
+        private void AddItem()
+        {
+            ItemList.Add(new SavePurchasesItemInfoViewModel());
+        }
+
 
         private async Task Send()
         {
             try
             {
                 Response = "Request sending..";
-                await Task.Delay(1000);
                 throw new NotImplementedException();
+                var response = await _transactionsPurchaseApiClient.SavePurchaseAsync(new RwandaVSDC.Models.JSON.TransactionsPurchase.SavePurchases.SavePurchaseRequest());
+                Response = _jsonSerializer.Serialize(response) ?? "NullResponse";
+                SD.LastRequestDate = response?.ResultDate ?? DateTime.Now.ToString("yyyyMMddHHmmss");
             }
             catch (Exception e)
             {

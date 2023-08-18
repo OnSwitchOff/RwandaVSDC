@@ -26,7 +26,7 @@ namespace RwandaVSDC.Services.ApiClients.InitializationApiClient
 
         public async Task<InitInfoResponse?> SelectInitInfoAsync(InitInfoRequest requestBody)
         {
-            var url = $"{_baseUrl}/initializer/selectInitInfo";
+            var url = $"{_baseUrl}initializer/selectInitInfo";
 
             string requestBodyString = _jsonSerializer.Serialize(requestBody);
 

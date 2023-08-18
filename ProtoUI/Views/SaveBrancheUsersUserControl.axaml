@@ -48,19 +48,19 @@
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Width="200"  Text="6. Address" HorizontalAlignment="Left" VerticalAlignment="Center" />
 						<TextBox Width="150" Text="{Binding	Address, Mode=TwoWay}"/>
-						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Address" Margin="5"/>
+						<Ellipse Fill="Transparent" Width="14" Height="14" ToolTip.Tip="Address" Margin="5"/>
 					</StackPanel>
 					<!--Contact-->
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Width="200"  Text="7. Contact" HorizontalAlignment="Left" VerticalAlignment="Center" />
 						<TextBox Width="150" Text="{Binding	Contact, Mode=TwoWay}"/>
-						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Contact" Margin="5"/>
+						<Ellipse Fill="Transparent" Width="14" Height="14" ToolTip.Tip="Contact" Margin="5"/>
 					</StackPanel>
 					<!--Authority Code-->
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Width="200"  Text="8. Authority Code" HorizontalAlignment="Left" VerticalAlignment="Center" />
 						<TextBox Width="150" Text="{Binding	AuthorityCode, Mode=TwoWay}"/>
-						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Authority Code" Margin="5"/>
+						<Ellipse Fill="Transparent" Width="14" Height="14" ToolTip.Tip="Authority Code" Margin="5"/>
 					</StackPanel>
 					<!--Used (Y/N)-->
 					<StackPanel Orientation="Horizontal" Margin="5">
@@ -72,7 +72,7 @@
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Width="200"  Text="10. Remark" HorizontalAlignment="Left" VerticalAlignment="Center" />
 						<TextBox Width="150" Text="{Binding Remark, Mode=TwoWay}"/>
-						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Remark" Margin="5"/>
+						<Ellipse Fill="Transparent" Width="14" Height="14" ToolTip.Tip="Remark" Margin="5"/>
 					</StackPanel>
 					<!--Registrant Name-->
 					<StackPanel Orientation="Horizontal" Margin="5">

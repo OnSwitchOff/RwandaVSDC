@@ -15,15 +15,16 @@ namespace ProtoUI.ViewModels
     public class SaveStockMasterViewModel: ViewModelBase
     {
         private readonly IStockApiClient _stockApiClient;
+        private readonly IJsonSerializerService _jsonSerializer;
 
-        private string _tin = string.Empty;
-        private string _branchId = string.Empty;
+        private string _tin = SD.TIN;
+        private string _branchId = SD.BranchID;
         private string _itemCode = string.Empty;
-        private string _remainQuantity = string.Empty;
-        private string _registrantName = string.Empty;
-        private string _registrantId = string.Empty;
-        private string _modifierName = string.Empty;
-        private string _modifierId = string.Empty;        
+        private decimal _remainQuantity = 0m;
+        private string _registrantName = SD.RegistrantName;
+        private string _registrantId = SD.RegistrantID;
+        private string _modifierName = SD.ModifierName;
+        private string _modifierId = SD.ModifierID;        
 
         private string _response = string.Empty;
         public IReactiveCommand SendCommand { get; }
@@ -31,7 +32,7 @@ namespace ProtoUI.ViewModels
         public string Tin { get => _tin; set => this.RaiseAndSetIfChanged(ref _tin, value); }
         public string BranchId { get => _branchId; set => this.RaiseAndSetIfChanged(ref _branchId, value); }
         public string ItemCode { get => _itemCode; set => this.RaiseAndSetIfChanged(ref _itemCode, value); }
-        public string RemainQuantity { get => _remainQuantity; set => this.RaiseAndSetIfChanged(ref _remainQuantity, value); }
+        public decimal RemainQuantity { get => _remainQuantity; set => this.RaiseAndSetIfChanged(ref _remainQuantity, value); }
         public string RegistrantName { get => _registrantName; set => this.RaiseAndSetIfChanged(ref _registrantName, value); }
         public string RegistrantId { get => _registrantId; set => this.RaiseAndSetIfChanged(ref _registrantId, value); }
         public string ModifierName { get => _modifierName; set => this.RaiseAndSetIfChanged(ref _modifierName, value); }
@@ -40,6 +41,7 @@ namespace ProtoUI.ViewModels
         public SaveStockMasterViewModel() : base()
         {
             _stockApiClient = new StockApiClient(new HttpApiService(new HttpClient()), new JsonSerializerService());
+            _jsonSerializer = new JsonSerializerService();
             SendCommand = ReactiveCommand.Create(Send);
         }
 
@@ -47,9 +49,21 @@ namespace ProtoUI.ViewModels
         {
             try
             {
-                Response = "Request sending..";
-                await Task.Delay(1000);
-                throw new NotImplementedException();
+                Response = "Request sending.."; 
+                var response = await _stockApiClient.SaveStockMasterAsync(new RwandaVSDC.Models.JSON.Stock.SaveStockMaster.SaveStockMasterRequest()
+                {
+                    BranchId = BranchId,
+                    Tin = Tin,
+                    ItemCode = ItemCode,
+                    RemainQuantity = RemainQuantity,
+                    RegistrantId = RegistrantId,
+                    RegistrantName = RegistrantName,
+                    ModifierId = ModifierId,
+                    ModifierName = ModifierName
+                });
+
+                Response = _jsonSerializer.Serialize(response) ?? "NullResponse";
+                SD.LastRequestDate = response?.ResultDate ?? DateTime.Now.ToString("yyyyMMddHHmmss");
             }
             catch (Exception e)
             {

@@ -30,7 +30,7 @@
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Width="200"  Text="3. Item Code" HorizontalAlignment="Left" VerticalAlignment="Center" />
 						<TextBox Width="150" Text="{Binding	ItemCode, Mode=TwoWay}" IsReadOnly="True"/>
-						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Item Code" Margin="5"/>
+						<Ellipse Fill="Gray" Width="14" Height="14" ToolTip.Tip="Item Code" Margin="5"/>
 					</StackPanel>
 					<!--Item Classification Code-->
 					<StackPanel Orientation="Horizontal" Margin="5">
@@ -68,7 +68,7 @@
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Width="200"  Text="7. Item Standart Name" HorizontalAlignment="Left" VerticalAlignment="Center" />
 						<TextBox Width="150" Text="{Binding	ItemStandartName, Mode=TwoWay}"/>
-						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Item Standart Name" Margin="5"/>
+						<Ellipse Fill="Green" Width="14" Height="14" ToolTip.Tip="Item Standart Name" Margin="5"/>
 					</StackPanel>
 					<!--Origin Place Code-->
 					<StackPanel Orientation="Horizontal" Margin="5">
@@ -154,13 +154,13 @@
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Width="200"  Text="12. Batch Number" HorizontalAlignment="Left" VerticalAlignment="Center" />
 						<TextBox Width="150" Text="{Binding	BatchNumber, Mode=TwoWay}"/>
-						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="BatchNumber" Margin="5"/>
+						<Ellipse Fill="Green" Width="14" Height="14" ToolTip.Tip="BatchNumber" Margin="5"/>
 					</StackPanel>
 					<!--Barcode-->
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Width="200"  Text="13. Barcode" HorizontalAlignment="Left" VerticalAlignment="Center" />
 						<TextBox Width="150" Text="{Binding	Barcode, Mode=TwoWay}"/>
-						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Barcode" Margin="5"/>
+						<Ellipse Fill="Green" Width="14" Height="14" ToolTip.Tip="Barcode" Margin="5"/>
 					</StackPanel>
 					<!--Default Unit Price-->
 					<StackPanel Orientation="Horizontal" Margin="5">
@@ -172,71 +172,77 @@
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Width="200"  Text="15. Group1 Unit Price" HorizontalAlignment="Left" VerticalAlignment="Center" />
 						<TextBox Width="150" Text="{Binding	Group1UnitPrice, Mode=TwoWay}"/>
-						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Group1 Unit Price" Margin="5"/>
+						<Ellipse Fill="Green" Width="14" Height="14" ToolTip.Tip="Group1 Unit Price" Margin="5"/>
 					</StackPanel>
 					<!--Group2 Unit Price-->
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Width="200"  Text="16. Group2 Unit Price" HorizontalAlignment="Left" VerticalAlignment="Center" />
 						<TextBox Width="150" Text="{Binding	Group2UnitPrice, Mode=TwoWay}"/>
-						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Group2 Unit Price" Margin="5"/>
+						<Ellipse Fill="Green" Width="14" Height="14" ToolTip.Tip="Group2 Unit Price" Margin="5"/>
 					</StackPanel>
 					<!--Group3 Unit Price-->
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Width="200"  Text="17. Group3 Unit Price" HorizontalAlignment="Left" VerticalAlignment="Center" />
 						<TextBox Width="150" Text="{Binding	Group3UnitPrice, Mode=TwoWay}"/>
-						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Group3 Unit Price" Margin="5"/>
+						<Ellipse Fill="Green" Width="14" Height="14" ToolTip.Tip="Group3 Unit Price" Margin="5"/>
 					</StackPanel>
 					<!--Group4 Unit Price-->
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Width="200"  Text="18. Group4 Unit Price" HorizontalAlignment="Left" VerticalAlignment="Center" />
 						<TextBox Width="150" Text="{Binding	Group4UnitPrice, Mode=TwoWay}"/>
-						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Group4 Unit Price" Margin="5"/>
+						<Ellipse Fill="Green" Width="14" Height="14" ToolTip.Tip="Group4 Unit Price" Margin="5"/>
 					</StackPanel>
 					<!--Group5 Unit Price-->
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Width="200"  Text="19. Group5 Unit Price" HorizontalAlignment="Left" VerticalAlignment="Center" />
 						<TextBox Width="150" Text="{Binding	Group5UnitPrice, Mode=TwoWay}"/>
-						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Group5 Unit Price" Margin="5"/>
+						<Ellipse Fill="Green" Width="14" Height="14" ToolTip.Tip="Group5 Unit Price" Margin="5"/>
 					</StackPanel>
 					<!--Additional Info-->
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Width="200"  Text="20. Additional Info" HorizontalAlignment="Left" VerticalAlignment="Center" />
 						<TextBox Width="150" Text="{Binding	AdditionalInfo, Mode=TwoWay}"/>
-						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Additional Info" Margin="5"/>
+						<Ellipse Fill="Green" Width="14" Height="14" ToolTip.Tip="Additional Info" Margin="5"/>
 					</StackPanel>
 					<!--Safty Quantity-->
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Width="200"  Text="21. Safty Quantity" HorizontalAlignment="Left" VerticalAlignment="Center" />
 						<TextBox Width="150" Text="{Binding	SaftyQuantity, Mode=TwoWay}"/>
-						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Safty Quantity" Margin="5"/>
+						<Ellipse Fill="Green" Width="14" Height="14" ToolTip.Tip="Safty Quantity" Margin="5"/>
+					</StackPanel>
+					<!--Insurance Appicable(Y/N)-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="22. InsuranceAppicableYesNo" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding InsuranceAppicableYesNo, Mode=TwoWay}"/>
+						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Insurance Appicable(Y/N)" Margin="5"/>
 					</StackPanel>
 					<!--Used (Y/N)-->
 					<StackPanel Orientation="Horizontal" Margin="5">
-						<TextBlock Width="200"  Text="22. Used (Y/N)" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBlock Width="200"  Text="23. Used (Y/N)" HorizontalAlignment="Left" VerticalAlignment="Center" />
 						<TextBox Width="150" Text="{Binding UsedYesNo, Mode=TwoWay}"/>
 						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Used (Y/N)" Margin="5"/>
 					</StackPanel>
 					<!--Registrant Name-->
 					<StackPanel Orientation="Horizontal" Margin="5">
-						<TextBlock Width="200"  Text="23. Registrant Name" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBlock Width="200"  Text="24. Registrant Name" HorizontalAlignment="Left" VerticalAlignment="Center" />
 						<TextBox Width="150" Text="{Binding RegistrantName, Mode=TwoWay}"/>
 						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Registrant Name" Margin="5"/>
 					</StackPanel>
 					<!--Registrant Id-->
 					<StackPanel Orientation="Horizontal" Margin="5">
-						<TextBlock Width="200"  Text="24. Registrant ID" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBlock Width="200"  Text="25. Registrant ID" HorizontalAlignment="Left" VerticalAlignment="Center" />
 						<TextBox Width="150" Text="{Binding RegistrantId, Mode=TwoWay}"/>
 						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Registrant ID" Margin="5"/>
 					</StackPanel>
 					<!--Modifier Name-->
 					<StackPanel Orientation="Horizontal" Margin="5">
-						<TextBlock Width="200"  Text="25. Modifier Name" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBlock Width="200"  Text="26. Modifier Name" HorizontalAlignment="Left" VerticalAlignment="Center" />
 						<TextBox Width="150" Text="{Binding ModifierName, Mode=TwoWay}"/>
 						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Modifier Name" Margin="5"/>
 					</StackPanel>
 					<!--Modifier Id-->
 					<StackPanel Orientation="Horizontal" Margin="5">
-						<TextBlock Width="200"  Text="26. Modifier ID" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBlock Width="200"  Text="27. Modifier ID" HorizontalAlignment="Left" VerticalAlignment="Center" />
 						<TextBox Width="150" Text="{Binding ModifierId, Mode=TwoWay}"/>
 						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Modifier ID" Margin="5"/>
 					</StackPanel>

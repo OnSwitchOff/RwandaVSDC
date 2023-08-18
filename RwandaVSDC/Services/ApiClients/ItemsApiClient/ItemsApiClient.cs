@@ -26,7 +26,7 @@ namespace RwandaVSDC.Services.ApiClients.ItemsApiClient
 
         public async Task<ItemResponse?> SelectItemsAsync(ItemRequest requestBody)
         {
-            var url = $"{_baseUrl}/items/selectItems";
+            var url = $"{_baseUrl}items/selectItems";
 
             string requestBodyString = _jsonSerializer.Serialize(requestBody);
 
@@ -42,7 +42,7 @@ namespace RwandaVSDC.Services.ApiClients.ItemsApiClient
 
         public async Task<SaveItemResponse?> SaveItemsAsync(SaveItemRequest requestBody)
         {
-            var url = "http://example.com/items/saveItems";
+            var url = $"{_baseUrl}items/saveItems";
 
             string requestBodyString = _jsonSerializer.Serialize(requestBody);
 

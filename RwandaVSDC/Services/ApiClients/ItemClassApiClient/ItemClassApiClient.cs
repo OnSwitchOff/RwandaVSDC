@@ -25,7 +25,7 @@ namespace RwandaVSDC.Services.ApiClients.ItemClassApiClient
 
         public async Task<ItemClassResponse?> SelectItemsClassAsync(ItemClassRequest requestBody)
         {
-            var url = $"{_baseUrl}/itemClass/selectItemsClass";
+            var url = $"{_baseUrl}itemClass/selectItemsClass";
 
             string requestBodyString = _jsonSerializer.Serialize(requestBody);
 

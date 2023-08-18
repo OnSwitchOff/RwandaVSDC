@@ -11,6 +11,10 @@
 	<Grid RowDefinitions="*,auto" ColumnDefinitions="*,*">
 		<!--Request-->
 		<Grid Grid.Column="0" Grid.Row="0" Background="LightGray">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="300"/>
+			</Grid.RowDefinitions>
 			<ScrollViewer Background="Transparent">
 				<StackPanel Orientation="Vertical" Background="Transparent">
 					<TextBlock Text="Save Sales Request" Margin="5" FontWeight="Bold"/>
@@ -42,13 +46,19 @@
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Width="200"  Text="5. Customer Tin" HorizontalAlignment="Left" VerticalAlignment="Center" />
 						<TextBox Width="150" Text="{Binding	CustomerTin, Mode=TwoWay}"/>
-						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Customer Tin" Margin="5"/>
+						<Ellipse Fill="Green" Width="14" Height="14" ToolTip.Tip="Customer Tin" Margin="5"/>
+					</StackPanel>
+					<!--Purchase code-->
+					<StackPanel Orientation="Horizontal" Margin="5">
+						<TextBlock Width="200"  Text="5. Purchase code" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						<TextBox Width="150" Text="{Binding	PurchaseCode, Mode=TwoWay}"/>
+						<Ellipse Fill="Yellow" Width="14" Height="14" ToolTip.Tip="For Business customers the purchase code is mandatory, for individuals it is optional" Margin="5"/>
 					</StackPanel>
 					<!--Customer Name-->
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Width="200"  Text="6. Customer Name" HorizontalAlignment="Left" VerticalAlignment="Center" />
 						<TextBox Width="150" Text="{Binding	CustomerName, Mode=TwoWay}"/>
-						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Customer Name" Margin="5"/>
+						<Ellipse Fill="Green" Width="14" Height="14" ToolTip.Tip="Customer Name" Margin="5"/>
 					</StackPanel>
 					<!--Sales Type Code-->
 					<StackPanel Orientation="Horizontal" Margin="5">
@@ -66,7 +76,7 @@
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Width="200"  Text="9. Payment Type Code" HorizontalAlignment="Left" VerticalAlignment="Center" />
 						<TextBox Width="150" Text="{Binding	PaymentTypeCode, Mode=TwoWay}"/>
-						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Payment Type Code" Margin="5"/>
+						<Ellipse Fill="Green" Width="14" Height="14" ToolTip.Tip="Payment Type Code" Margin="5"/>
 					</StackPanel>
 					<!--Invoice Status Code-->
 					<StackPanel Orientation="Horizontal" Margin="5">
@@ -90,31 +100,31 @@
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Width="200"  Text="13. Stock Released Date" HorizontalAlignment="Left" VerticalAlignment="Center" />
 						<TextBox Width="150" Text="{Binding	SaleDate, Mode=TwoWay}"/>
-						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Stock Released Date" Margin="5"/>
+						<Ellipse Fill="Green" Width="14" Height="14" ToolTip.Tip="Stock Released Date" Margin="5"/>
 					</StackPanel>
 					<!--Cancel Requested Date-->
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Width="200"  Text="14. Cancel Requested Date" HorizontalAlignment="Left" VerticalAlignment="Center" />
 						<TextBox Width="150" Text="{Binding	CancelRequestedDate, Mode=TwoWay}"/>
-						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Cancel Requested Date" Margin="5"/>
+						<Ellipse Fill="Green" Width="14" Height="14" ToolTip.Tip="Cancel Requested Date" Margin="5"/>
 					</StackPanel>
 					<!--Canceled Date-->
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Width="200"  Text="15. Canceled Date" HorizontalAlignment="Left" VerticalAlignment="Center" />
 						<TextBox Width="150" Text="{Binding	CanceledDate, Mode=TwoWay}"/>
-						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="CanceledDate" Margin="5"/>
+						<Ellipse Fill="Green" Width="14" Height="14" ToolTip.Tip="CanceledDate" Margin="5"/>
 					</StackPanel>
 					<!--Refunded Date-->
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Width="200"  Text="16. Refunded Date" HorizontalAlignment="Left" VerticalAlignment="Center" />
 						<TextBox Width="150" Text="{Binding	RefundedDate, Mode=TwoWay}"/>
-						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Refunded Date" Margin="5"/>
+						<Ellipse Fill="Green" Width="14" Height="14" ToolTip.Tip="Refunded Date" Margin="5"/>
 					</StackPanel>
 					<!--Refunded Reasone Code-->
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Width="200"  Text="17. Refunded Reasone Code" HorizontalAlignment="Left" VerticalAlignment="Center" />
 						<TextBox Width="150" Text="{Binding	RefundedReasoneCode, Mode=TwoWay}"/>
-						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Refunded Reasone Code" Margin="5"/>
+						<Ellipse Fill="Green" Width="14" Height="14" ToolTip.Tip="See ‘4.15. Transaction Progress‘" Margin="5"/>
 					</StackPanel>
 					<!--Total Item Count-->
 					<StackPanel Orientation="Horizontal" Margin="5">
@@ -222,7 +232,7 @@
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Width="200"  Text="35. Remark" HorizontalAlignment="Left" VerticalAlignment="Center" />
 						<TextBox Width="150" Text="{Binding	Remark, Mode=TwoWay}"/>
-						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Remark" Margin="5"/>
+						<Ellipse Fill="Green" Width="14" Height="14" ToolTip.Tip="Remark" Margin="5"/>
 					</StackPanel>
 					
 					<!--Registrant Name-->
@@ -255,13 +265,13 @@
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Width="200"  Text="40.1 Customer Tin" HorizontalAlignment="Left" VerticalAlignment="Center" />
 						<TextBox Width="150" Text="{Binding Receipt.CustomerTin, Mode=TwoWay}"/>
-						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Customer Tin" Margin="5"/>
+						<Ellipse Fill="Green" Width="14" Height="14" ToolTip.Tip="Customer Tin" Margin="5"/>
 					</StackPanel>
 					<!--Customer Mobile Number-->
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Width="200"  Text="40.2 Customer Mobile Number" HorizontalAlignment="Left" VerticalAlignment="Center" />
 						<TextBox Width="150" Text="{Binding Receipt.CustomerMobileNumber, Mode=TwoWay}"/>
-						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Customer Mobile Number" Margin="5"/>
+						<Ellipse Fill="Green" Width="14" Height="14" ToolTip.Tip="Customer Mobile Number" Margin="5"/>
 					</StackPanel>
 					<!--Report Number-->
 					<StackPanel Orientation="Horizontal" Margin="5">
@@ -273,38 +283,48 @@
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Width="200"  Text="40.4 Trade Name" HorizontalAlignment="Left" VerticalAlignment="Center" />
 						<TextBox Width="150" Text="{Binding Receipt.TradeName, Mode=TwoWay}"/>
-						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Trade Name" Margin="5"/>
+						<Ellipse Fill="Green" Width="14" Height="14" ToolTip.Tip="Trade Name" Margin="5"/>
 					</StackPanel>
 					<!--Address-->
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Width="200"  Text="40.5 Address" HorizontalAlignment="Left" VerticalAlignment="Center" />
 						<TextBox Width="150" Text="{Binding Receipt.Address, Mode=TwoWay}"/>
-						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Address" Margin="5"/>
+						<Ellipse Fill="Green" Width="14" Height="14" ToolTip.Tip="Address" Margin="5"/>
 					</StackPanel>
 					<!--Top Message-->
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Width="200"  Text="40.6 Top Message" HorizontalAlignment="Left" VerticalAlignment="Center" />
 						<TextBox Width="150" Text="{Binding Receipt.TopMessage, Mode=TwoWay}"/>
-						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Top Message" Margin="5"/>
+						<Ellipse Fill="Green" Width="14" Height="14" ToolTip.Tip="Top Message" Margin="5"/>
 					</StackPanel>
 					<!--Bottom Message-->
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Width="200"  Text="40.7 Bottom Message" HorizontalAlignment="Left" VerticalAlignment="Center" />
 						<TextBox Width="150" Text="{Binding Receipt.BottomMessage, Mode=TwoWay}"/>
-						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Bottom Message" Margin="5"/>
+						<Ellipse Fill="Green" Width="14" Height="14" ToolTip.Tip="Bottom Message" Margin="5"/>
 					</StackPanel>
 					<!--Buyers Receive Item Yes/No-->
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Width="200"  Text="40.8 Buyers Receive Item Yes/No" HorizontalAlignment="Left" VerticalAlignment="Center" />
 						<TextBox Width="150" Text="{Binding Receipt.BuyersReceiveItemYesNo, Mode=TwoWay}"/>
 						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Buyers Receive Item Y/N" Margin="5"/>
-					</StackPanel>
-					<!--Items List-->
-					<TextBlock Text="41. Items List" Margin="5" FontWeight="Bold"/>
-					<DataGrid Items="{Binding ItemList}" AutoGenerateColumns="True" Background="White">
-					</DataGrid>
+					</StackPanel>					
 				</StackPanel>
 			</ScrollViewer>
+			<Grid Grid.Row="1" Background="Gray">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="auto"/>
+					<RowDefinition Height="*"/>
+				</Grid.RowDefinitions>
+				<!--Items List-->
+				<TextBlock Grid.Row="0" Text="41. Items List" Margin="5" FontWeight="Bold" VerticalAlignment="Center"/>
+				<StackPanel  Grid.Row="0"  Orientation="Horizontal" HorizontalAlignment="Right">
+					<Button Content="Add" Command="{Binding	AddItemCommand}" Margin="5"/>
+					<Button Content="Remove" Command="{Binding	RemoveItemCommand}" Margin="5"/>
+				</StackPanel>
+				<DataGrid  Grid.Row="1"  Items="{Binding ItemList}" SelectedItem="{Binding	SelectedItem}" AutoGenerateColumns="True" Background="Transparent" RowBackground="White" AlternatingRowBackground="LightGray" GridLinesVisibility="Vertical">
+				</DataGrid>
+			</Grid>
 		</Grid>
 		<!--Response-->
 		<Grid Grid.Column="1" Grid.Row="0" Background="LightBlue">

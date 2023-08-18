@@ -14,9 +14,9 @@ namespace ProtoUI.ViewModels
     {
         private readonly IInitializationApiClient _initializationApiClient;
 
-        private string _tin = string.Empty;
-        private string _branchId = string.Empty;
-        private string _deviceSerialNumber = string.Empty;
+        private string _tin = SD.TIN;
+        private string _branchId = SD.BranchID;
+        private string _deviceSerialNumber = SD.DeviceSeiralNo;
         private string _response = string.Empty;
 
         public IReactiveCommand SendCommand { get; }
@@ -68,6 +68,8 @@ namespace ProtoUI.ViewModels
                     $"ResultDate:{response?.ResultDate}\n" +
                     $"ResultCode:{response?.ResultCode}\n" +
                     $"ResultMessage:{response?.ResultMessage}\n";
+
+                SD.LastRequestDate = response?.ResultDate ?? DateTime.Now.ToString("yyyyMMddHHmmss");
             }
             catch (Exception e)
             {

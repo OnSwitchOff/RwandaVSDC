@@ -15,10 +15,11 @@ namespace ProtoUI.ViewModels
     public class SelectTransactionsPurchaseSalesViewModel : ViewModelBase
     {
         private readonly ITransactionsPurchaseApiClient _transactionsPurchaseApiClient;
+        private readonly IJsonSerializerService _jsonSerializer;
 
-        private string _tin = string.Empty;
-        private string _branchId = string.Empty;
-        private string _lastRequestDate = string.Empty;
+        private string _tin = SD.TIN;
+        private string _branchId = SD.BranchID;
+        private string _lastRequestDate = SD.LastRequestDate;
         private string _response = string.Empty;
 
         public IReactiveCommand SendCommand { get; }
@@ -49,6 +50,7 @@ namespace ProtoUI.ViewModels
         public SelectTransactionsPurchaseSalesViewModel() : base()
         {
             _transactionsPurchaseApiClient = new TransactionsPurchaseApiClient(new HttpApiService(new HttpClient()), new JsonSerializerService());
+            _jsonSerializer = new JsonSerializerService();
             SendCommand = ReactiveCommand.Create(Send);
         }
 
@@ -57,8 +59,13 @@ namespace ProtoUI.ViewModels
             try
             {
                 Response = "Request sending..";
-                await Task.Delay(1000);
-                throw new NotImplementedException();
+                var response = await _transactionsPurchaseApiClient.SelectTransactionsPurchaseSalesAsync(new RwandaVSDC.Models.JSON.TransactionsPurchase.SelectTransactionsPurchaseSales.TransactionsPurchaseSalesRequest()
+                { 
+                    BranchId = BranchId, LastRequestDate = LastRequestDate, Tin = Tin
+                });
+
+                Response = _jsonSerializer.Serialize(response) ?? "NullResponse";
+                SD.LastRequestDate = response?.ResultDate ?? DateTime.Now.ToString("yyyyMMddHHmmss");
             }
             catch (Exception e)
             {

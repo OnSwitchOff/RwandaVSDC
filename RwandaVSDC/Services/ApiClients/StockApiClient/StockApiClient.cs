@@ -28,7 +28,7 @@ namespace RwandaVSDC.Services.ApiClients.StockApiClient
 
         public async Task<StockMovementResponse?> SelectStockItemsAsync(StockMovementRequest requestBody)
         {
-            var url = $"{_baseUrl}/stock/selectStockItems";
+            var url = $"{_baseUrl}stock/selectStockItems";
 
             string requestBodyString = _jsonSerializer.Serialize(requestBody);
 
@@ -44,7 +44,7 @@ namespace RwandaVSDC.Services.ApiClients.StockApiClient
 
         public async Task<SaveStockResponse?> SaveStockItemsAsync(SaveStockRequest requestBody)
         {
-            var url = "http://example.com/stock/saveStockItems";
+            var url = $"{_baseUrl}stock/saveStockItems";
 
             string requestBodyString = _jsonSerializer.Serialize(requestBody);
 
@@ -60,7 +60,7 @@ namespace RwandaVSDC.Services.ApiClients.StockApiClient
 
         public async Task<SaveStockMasterResponse?> SaveStockMasterAsync(SaveStockMasterRequest requestBody)
         {
-            var url = "http://example.com/stockMaster/saveStockMaster";
+            var url = $"{_baseUrl}stockMaster/saveStockMaster";
 
             string requestBodyString = _jsonSerializer.Serialize(requestBody);
 

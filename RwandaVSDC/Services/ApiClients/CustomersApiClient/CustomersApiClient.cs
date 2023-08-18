@@ -26,7 +26,7 @@ namespace RwandaVSDC.Services.ApiClients.CustomersApiClient
 
         public async Task<CustomerResponse?> SelectCustomerAsync(CustomerRequest requestBody)
         {
-            var url = $"{_baseUrl}/customers/selectCustomer";
+            var url = $"{_baseUrl}customers/selectCustomer";
 
             string requestBodyString = _jsonSerializer.Serialize(requestBody);
 

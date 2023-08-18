@@ -15,17 +15,18 @@ namespace ProtoUI.ViewModels
     public class SaveBrancheInsurancesViewModel: ViewModelBase
     {
         private readonly IBranchesApiClient _branchesApiClient;
+        private readonly IJsonSerializerService _jsonSerializer;
 
-        private string _tin = string.Empty;
-        private string _branchId = string.Empty;
+        private string _tin = SD.TIN;
+        private string _branchId = SD.BranchID;
         private string _insuranceCode = string.Empty;
         private string _insuranceName = string.Empty;
-        private string _premiumRate = string.Empty;
+        private uint _premiumRate = 0;
         private string _usedYesNo = string.Empty;
-        private string _registrantName = string.Empty;
-        private string _registrantId = string.Empty;
-        private string _modifierName = string.Empty;
-        private string _modifierId = string.Empty;
+        private string _registrantName = SD.RegistrantName;
+        private string _registrantId = SD.RegistrantID;
+        private string _modifierName = SD.ModifierName;
+        private string _modifierId = SD.ModifierID;
 
         private string _response = string.Empty;
 
@@ -34,7 +35,7 @@ namespace ProtoUI.ViewModels
         public string BranchId { get => _branchId; set => this.RaiseAndSetIfChanged(ref _branchId, value); }
         public string InsuranceCode { get => _insuranceCode; set => this.RaiseAndSetIfChanged(ref _insuranceCode, value); }
         public string InsuranceName { get => _insuranceName; set => this.RaiseAndSetIfChanged(ref _insuranceName, value); }
-        public string PremiumRate { get => _premiumRate; set => this.RaiseAndSetIfChanged(ref _premiumRate, value); }
+        public uint PremiumRate { get => _premiumRate; set => this.RaiseAndSetIfChanged(ref _premiumRate, value); }
         public string UsedYesNo { get => _usedYesNo; set => this.RaiseAndSetIfChanged(ref _usedYesNo, value); }
         public string RegistrantName { get => _registrantName; set => this.RaiseAndSetIfChanged(ref _registrantName, value); }
         public string RegistrantId { get => _registrantId; set => this.RaiseAndSetIfChanged(ref _registrantId, value); }
@@ -45,6 +46,7 @@ namespace ProtoUI.ViewModels
         public SaveBrancheInsurancesViewModel() : base()
         {
             _branchesApiClient = new BranchesApiClient(new HttpApiService(new HttpClient()), new JsonSerializerService());
+            _jsonSerializer = new JsonSerializerService();
             SendCommand = ReactiveCommand.Create(Send);
         }
 
@@ -53,8 +55,21 @@ namespace ProtoUI.ViewModels
             try
             {
                 Response = "Request sending..";
-                await Task.Delay(1000);
-                throw new NotImplementedException();
+                var response = await _branchesApiClient.SaveBrancheInsurancesAsync(new RwandaVSDC.Models.JSON.Branches.SaveBrancheInsurances.SaveBranchInsuranceRequest()
+                {
+                    Tin = Tin,
+                    BranchId = BranchId,
+                    InsuranceCode = InsuranceCode,
+                    InsuranceName = InsuranceName,
+                    PremiumRate = PremiumRate,
+                    UsedYesNo = UsedYesNo,
+                    RegistrantName = RegistrantName,
+                    RegistrantID = RegistrantId,
+                    ModifierID = ModifierId,
+                    ModifierName = ModifierName
+                });
+                Response = _jsonSerializer.Serialize(response) ?? "NullResponse";
+                SD.LastRequestDate = response?.ResultDate ?? DateTime.Now.ToString("yyyyMMddHHmmss");
             }
             catch (Exception e)
             {

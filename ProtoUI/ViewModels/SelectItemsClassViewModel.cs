@@ -15,10 +15,11 @@ namespace ProtoUI.ViewModels
     public class SelectItemsClassViewModel: ViewModelBase
     {
         private readonly IItemClassApiClient _itemClassApiClient;
+        private readonly IJsonSerializerService _jsonSerializer;
 
-        private string _tin = string.Empty;
-        private string _branchId = string.Empty;
-        private string _lastRequestDate = string.Empty;
+        private string _tin = SD.TIN;
+        private string _branchId = SD.BranchID;
+        private string _lastRequestDate = SD.LastRequestDate;
         private string _response = string.Empty;
 
         public IReactiveCommand SendCommand { get; }
@@ -49,6 +50,7 @@ namespace ProtoUI.ViewModels
         public SelectItemsClassViewModel() : base()
         {
             _itemClassApiClient = new ItemClassApiClient(new HttpApiService(new HttpClient()), new JsonSerializerService());
+            _jsonSerializer = new JsonSerializerService();
             SendCommand = ReactiveCommand.Create(Send);
         }
 
@@ -57,8 +59,14 @@ namespace ProtoUI.ViewModels
             try
             {
                 Response = "Request sending..";
-                await Task.Delay(1000);
-                throw new NotImplementedException();
+                var response = await _itemClassApiClient.SelectItemsClassAsync(new RwandaVSDC.Models.JSON.ItemClass.SelectItemsClass.ItemClassRequest
+                {
+                    Tin = Tin,
+                    BranchId = BranchId,
+                    LastRequestDate = LastRequestDate
+                });
+                Response = _jsonSerializer.Serialize(response) ?? "NullResponse";
+                SD.LastRequestDate = response?.ResultDate ?? DateTime.Now.ToString("yyyyMMddHHmmss");
             }
             catch (Exception e)
             {

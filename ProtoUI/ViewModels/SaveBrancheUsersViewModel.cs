@@ -15,9 +15,10 @@ namespace ProtoUI.ViewModels
     public class SaveBrancheUsersViewModel: ViewModelBase
     {
         private readonly IBranchesApiClient _branchesApiClient;
+        private readonly IJsonSerializerService _jsonSerializer;
 
-        private string _tin = string.Empty;
-        private string _branchId = string.Empty;
+        private string _tin = SD.TIN;
+        private string _branchId = SD.BranchID;
         private string _userId = string.Empty;
         private string _userName = string.Empty;
         private string _password = string.Empty;
@@ -26,10 +27,10 @@ namespace ProtoUI.ViewModels
         private string _authorityCode = string.Empty;
         private string _remark = string.Empty;
         private string _usedYesNo = string.Empty;
-        private string _registrantName = string.Empty;
-        private string _registrantId = string.Empty;
-        private string _modifierName = string.Empty;
-        private string _modifierId = string.Empty;
+        private string _registrantName = SD.RegistrantName;
+        private string _registrantId = SD.RegistrantID;
+        private string _modifierName = SD.ModifierName;
+        private string _modifierId = SD.ModifierID;
 
         private string _response = string.Empty;
 
@@ -53,6 +54,7 @@ namespace ProtoUI.ViewModels
         public SaveBrancheUsersViewModel() : base()
         {
             _branchesApiClient = new BranchesApiClient(new HttpApiService(new HttpClient()), new JsonSerializerService());
+            _jsonSerializer = new JsonSerializerService();
             SendCommand = ReactiveCommand.Create(Send);
         }
 
@@ -61,8 +63,26 @@ namespace ProtoUI.ViewModels
             try
             {
                 Response = "Request sending..";
-                await Task.Delay(1000);
-                throw new NotImplementedException();
+                var response = await _branchesApiClient.SaveBrancheUsersAsync(new RwandaVSDC.Models.JSON.Branches.SaveBrancheUsers.SaveBranchUserRequest()
+                {
+                    Tin = Tin,
+                    BranchId = BranchId,
+                    UserID = UserId,
+                    UserName = UserName,
+                    Password = Password,
+                    Address = Address,
+                    Contact = Contact,
+                    AuthorityCode = AuthorityCode,
+                    Remark = Remark,
+                    UsedYesNo = UsedYesNo,
+                    RegistrantName = RegistrantName,
+                    RegistrantID = RegistrantId,
+                    ModifierName = ModifierName,
+                    ModifierID = ModifierId
+                });
+
+                Response = _jsonSerializer.Serialize(response) ?? "NullResponse";
+                SD.LastRequestDate = response?.ResultDate ?? DateTime.Now.ToString("yyyyMMddHHmmss");
             }
             catch (Exception e)
             {

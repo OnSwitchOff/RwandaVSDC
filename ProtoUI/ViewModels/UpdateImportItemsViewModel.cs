@@ -14,21 +14,22 @@ namespace ProtoUI.ViewModels
 {
     public class UpdateImportItemsViewModel: ViewModelBase
     {
-        private readonly IImportsApiClient _importsClassApiClient;
+        private readonly IImportsApiClient _importsApiClient;
+        private readonly IJsonSerializerService _jsonSerializer;
 
-        private string _tin = string.Empty;
-        private string _branchId = string.Empty;
+        private string _tin = SD.TIN;
+        private string _branchId = SD.BranchID;
         private string _taskCode = string.Empty;
         private string _declarationDate = string.Empty;
-        private string _itemSequence = string.Empty;
+        private uint _itemSequence = 0;
         private string _hSCode = string.Empty;
         private string _itemClassificationCode = string.Empty;
         private string _itemCode = string.Empty;
         private string _importItemStatusCode = string.Empty;
         public CodeInfo? _selectedImportItemStatus = null;
         private string _remark = string.Empty;
-        private string _modifierName = string.Empty;
-        private string _modifierId = string.Empty;
+        private string _modifierName = SD.ModifierName;
+        private string _modifierId = SD.ModifierID;
 
         private string _response = string.Empty;
 
@@ -45,7 +46,7 @@ namespace ProtoUI.ViewModels
         }
         public string TaskCode { get => _taskCode; set => this.RaiseAndSetIfChanged(ref _taskCode, value); }
         public string DeclarationDate { get => _declarationDate; set => this.RaiseAndSetIfChanged(ref _declarationDate, value); }
-        public string ItemSequence { get => _itemSequence; set => this.RaiseAndSetIfChanged(ref _itemSequence, value); }
+        public uint ItemSequence { get => _itemSequence; set => this.RaiseAndSetIfChanged(ref _itemSequence, value); }
         public string HSCode { get => _hSCode; set => this.RaiseAndSetIfChanged(ref _hSCode, value); }
         public string ItemClassificationCode { get => _itemClassificationCode; set => this.RaiseAndSetIfChanged(ref _itemClassificationCode, value); }
         public string ItemCode { get => _itemCode; set => this.RaiseAndSetIfChanged(ref _itemCode, value); }
@@ -71,7 +72,8 @@ namespace ProtoUI.ViewModels
 
         public UpdateImportItemsViewModel() : base()
         {
-            _importsClassApiClient = new ImportsApiClient(new HttpApiService(new HttpClient()), new JsonSerializerService());
+            _importsApiClient = new ImportsApiClient(new HttpApiService(new HttpClient()), new JsonSerializerService());
+            _jsonSerializer = new JsonSerializerService();
             SendCommand = ReactiveCommand.Create(Send);
             ImportItemStatuses = ImportItemsStatusCodes.Codes.Select(kv => kv.Value).ToList();
         }
@@ -80,9 +82,24 @@ namespace ProtoUI.ViewModels
         {
             try
             {
-                Response = "Request sending..";
-                await Task.Delay(1000);
-                throw new NotImplementedException();
+                Response = "Request sending.."; 
+                var response = await _importsApiClient.UpdateImportItemsAsync(new RwandaVSDC.Models.JSON.Imports.UpdateImportItems.UpdateImportItemRequest()
+                {
+                    Tin = Tin,
+                    BranchId = BranchId,
+                    TaskCode = TaskCode,
+                    DeclarationDate = DeclarationDate,
+                    ItemSequence = ItemSequence,
+                    HSCode = HSCode,
+                    ItemClassificationCode = ItemClassificationCode,
+                    ItemCode = ItemCode,
+                    ImportItemStatusCode = ImportItemStatusCode,
+                    Remark = Remark,
+                    ModifierId = ModifierId,
+                    ModifierName = ModifierName
+                });
+                Response = _jsonSerializer.Serialize(response) ?? "NullResponse";
+                SD.LastRequestDate = response?.ResultDate ?? DateTime.Now.ToString("yyyyMMddHHmmss");
             }
             catch (Exception e)
             {

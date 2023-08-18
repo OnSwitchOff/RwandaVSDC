@@ -86,7 +86,7 @@
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Width="200" Text="10. Remark" HorizontalAlignment="Left" VerticalAlignment="Center" />
 						<TextBox Width="150" Text="{Binding	Remark, Mode=TwoWay}"/>
-						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Remark" Margin="5"/>
+						<Ellipse Fill="Green" Width="14" Height="14" ToolTip.Tip="Remark" Margin="5"/>
 					</StackPanel>
 					<!--Modifier Name-->
 					<StackPanel Orientation="Horizontal" Margin="5">

@@ -27,7 +27,7 @@ namespace RwandaVSDC.Services.ApiClients.TransactionsPurchaseApiClient
 
         public async Task<TransactionsPurchaseSalesResponse?> SelectTransactionsPurchaseSalesAsync(TransactionsPurchaseSalesRequest requestBody)
         {
-            var url = $"{_baseUrl}/trnsSales/saveSales";
+            var url = $"{_baseUrl}trnsSales/saveSales";
 
             string requestBodyString = _jsonSerializer.Serialize(requestBody);
 
@@ -43,7 +43,7 @@ namespace RwandaVSDC.Services.ApiClients.TransactionsPurchaseApiClient
 
         public async Task<SavePurchaseResponse?> SavePurchaseAsync(SavePurchaseRequest requestBody)
         {
-            var url = "http://example.com/trnsPurchase/selectTrnsPurchaseSales";
+            var url = $"{_baseUrl}trnsPurchase/selectTrnsPurchaseSales";
 
             string requestBodyString = _jsonSerializer.Serialize(requestBody);
 

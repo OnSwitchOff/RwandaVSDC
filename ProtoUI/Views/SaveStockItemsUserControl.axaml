@@ -10,10 +10,12 @@
 	</UserControl.DataContext>
 	<Grid RowDefinitions="*,auto" ColumnDefinitions="*,*">
 		<!--Request-->
-		<Grid Grid.Column="0" Grid.Row="0" Background="LightGray">
-			<ScrollViewer Background="Transparent">
+		<Grid Grid.Column="0" Grid.Row="0" Background="LightGray"  RowDefinitions="auto,*,300">
+			<Grid  Background="Wheat">
+				<TextBlock Text="Save Stock In/Out Request" Margin="10" FontWeight="Bold"/>
+			</Grid>
+			<ScrollViewer Grid.Row="1" Background="Transparent">
 				<StackPanel Orientation="Vertical" Background="Transparent">
-					<TextBlock Text="Save Stock In/Out Request" Margin="5" FontWeight="Bold"/>
 					<!--Tin-->
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Width="200" Text="1. TIN" HorizontalAlignment="Left" VerticalAlignment="Center" />
@@ -127,13 +129,24 @@
 						<TextBlock Width="200"  Text="19. Modifier ID" HorizontalAlignment="Left" VerticalAlignment="Center" />
 						<TextBox Width="150" Text="{Binding ModifierId, Mode=TwoWay}"/>
 						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Modifier ID" Margin="5"/>
-					</StackPanel>					
-					<!--Items List-->
-					<TextBlock Text="20. Items List" Margin="5" FontWeight="Bold"/>
-					<DataGrid Items="{Binding ItemList}" AutoGenerateColumns="True" Background="White">
-					</DataGrid>
+					</StackPanel>
 				</StackPanel>
 			</ScrollViewer>
+			<Grid Grid.Row="2" Background="Wheat">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="auto"/>
+					<RowDefinition Height="*"/>
+				</Grid.RowDefinitions>
+				<!--Items List-->
+				<TextBlock Grid.Row="0" Text="20. Items List" Margin="5" FontWeight="Bold" VerticalAlignment="Center"/>
+				<StackPanel  Grid.Row="0"  Orientation="Horizontal" HorizontalAlignment="Right">
+					<Button Content="Add" Command="{Binding	AddItemCommand}" Margin="5"/>
+					<Button Content="Edit" Command="{Binding EditItemCommand}" Margin="5"/>
+					<Button Content="Remove" Command="{Binding RemoveItemCommand}" Margin="5"/>
+				</StackPanel>
+				<DataGrid  Grid.Row="1" Items="{Binding ItemList}" SelectedItem="{Binding SelectedItem}" AutoGenerateColumns="True" Background="Transparent" TextBlock.Foreground="Red" RowBackground="White" AlternatingRowBackground="Wheat" GridLinesVisibility="Vertical">
+				</DataGrid>
+			</Grid>
 		</Grid>
 		<!--Response-->
 		<Grid Grid.Column="1" Grid.Row="0" Background="LightBlue">
@@ -144,6 +157,129 @@
 		<!--ButtonPanel-->
 		<Grid Grid.ColumnSpan="2" Grid.Row="1" Height="40" Background="Gray">
 			<Button Content="Send" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" Command="{Binding Send}"/>
+		</Grid>
+		<!--AddStockItemDialog-->
+		<Grid Grid.RowSpan="2" Background="#99000000" IsVisible="{Binding IsEditPanelVisible}">
+			<Grid Margin="20">
+				<Border Background="White" CornerRadius="10" BorderBrush="LightGray" BorderThickness="2"/>
+				<Grid RowDefinitions="auto,*,auto">
+					<Border Background="LightGray" CornerRadius="8,8,0,0" Margin="2">
+						<TextBlock Text="Save Stock Item" Margin="10" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+					</Border>
+					<ScrollViewer Background="Transparent" Grid.Row="1">
+						<StackPanel Orientation="Vertical" Background="Transparent" Margin="10">
+							<!--Item Sequence-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="150" Text="1. Item Sequence" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding	EditingItem.ItemSequence, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Item Sequence" Margin="5"/>
+							</StackPanel>
+							<!--Item Code-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="150" Text="2. Item Code" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding	EditingItem.ItemCode, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Item Code" Margin="5"/>
+							</StackPanel>
+							<!--Item Class Code-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="150" Text="3. Item Class Code" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding	EditingItem.ItemClassificationCode, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Item Class Code" Margin="5"/>
+							</StackPanel>
+							<!--Item Name-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="150" Text="4. Item Name" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding	EditingItem.ItemName, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Item Name" Margin="5"/>
+							</StackPanel>
+							<!--Barcode-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="150" Text="5. Barcode" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding	EditingItem.Barcode, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Barcode" Margin="5"/>
+							</StackPanel>
+							<!--PackagingUnitCode-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="150" Text="6. PackagingUnitCode" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding	EditingItem.PackagingUnitCode, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="PackagingUnitCode" Margin="5"/>
+							</StackPanel>
+							<!--PackageQuantity-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="150" Text="7. PackageQuantity" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding	EditingItem.PackageQuantity, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="PackageQuantity" Margin="5"/>
+							</StackPanel>
+							<!--QuantityUnitCode-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="150" Text="8. QuantityUnitCode" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding	EditingItem.QuantityUnitCode, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="QuantityUnitCode" Margin="5"/>
+							</StackPanel>
+							<!--UnitQuantity-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="150" Text="9. UnitQuantity" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding	EditingItem.UnitQuantity, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="UnitQuantity" Margin="5"/>
+							</StackPanel>
+							<!--ItemExpiredDate-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="150" Text="10. ItemExpiredDate" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding	EditingItem.ItemExpiredDate, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="ItemExpiredDate" Margin="5"/>
+							</StackPanel>
+							<!--UnitPrice-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="150" Text="11. UnitPrice" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding	EditingItem.UnitPrice, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="UnitPrice" Margin="5"/>
+							</StackPanel>
+							<!--SupplyAmount-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="150" Text="12. SupplyAmount" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding	EditingItem.SupplyAmount, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="SupplyAmount" Margin="5"/>
+							</StackPanel>
+							<!--DiscountAmount-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="150" Text="13. DiscountAmount" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding	EditingItem.DiscountAmount, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="DiscountAmount" Margin="5"/>
+							</StackPanel>
+							<!--TaxableAmount-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="150" Text="14. TaxableAmount" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding	EditingItem.TaxableAmount, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="TaxableAmount" Margin="5"/>
+							</StackPanel>
+							<!--TaxationTypeCode-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="150" Text="15. TaxationTypeCode" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding	EditingItem.TaxationTypeCode, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="TaxationTypeCode" Margin="5"/>
+							</StackPanel>
+							<!--TaxAmount-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="150" Text="16. TaxAmount" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding	EditingItem.TaxAmount, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="TaxAmount" Margin="5"/>
+							</StackPanel>
+							<!--TotalAmount-->
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock Width="150" Text="17. TotalAmount" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBox Width="150" Text="{Binding	EditingItem.TotalAmount, Mode=TwoWay}"/>
+								<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="TotalAmount" Margin="5"/>
+							</StackPanel>
+						</StackPanel>
+					</ScrollViewer>
+					<Border Grid.Row="2" HorizontalAlignment="Stretch" Background="LightGray" Margin="2" CornerRadius="0,0,8,8">
+						<StackPanel    Orientation="Horizontal"  HorizontalAlignment="Center" >
+							<Button Content="Confirm" Command="{Binding	ConfirmChangesCommand}" Margin="10"/>
+							<Button Content="Discard" Command="{Binding	DiscardChangesCommand}" Margin="10"/>
+						</StackPanel>
+					</Border>
+				</Grid>
+			</Grid>
 		</Grid>
 	</Grid>
 </UserControl>

@@ -28,7 +28,7 @@ namespace RwandaVSDC.Services.ApiClients.BranchesApiClient
 
         public async Task<BranchResponse?> SelectBranchesAsync(BranchRequest requestBody)
         {
-            var url = $"{_baseUrl}/branches/selectBranches";
+            var url = $"{_baseUrl}branches/selectBranches";
 
             string requestBodyString = _jsonSerializer.Serialize(requestBody);
 
@@ -44,7 +44,7 @@ namespace RwandaVSDC.Services.ApiClients.BranchesApiClient
 
         public async Task<SaveBranchCustomerResponse?> SaveBrancheCustomersAsync(SaveBranchCustomerRequest requestBody)
         {
-            var url = "http://example.com/branches/saveBrancheCustomers";
+            var url = $"{_baseUrl}branches/saveBrancheCustomers";
 
             string requestBodyString = _jsonSerializer.Serialize(requestBody);
 
@@ -60,7 +60,7 @@ namespace RwandaVSDC.Services.ApiClients.BranchesApiClient
 
         public async Task<SaveBranchUserResponse?> SaveBrancheUsersAsync(SaveBranchUserRequest requestBody)
         {
-            var url = "http://example.com/branches/saveBrancheUsers";
+            var url = $"{_baseUrl}branches/saveBrancheUsers";
 
             string requestBodyString = _jsonSerializer.Serialize(requestBody);
 
@@ -75,7 +75,7 @@ namespace RwandaVSDC.Services.ApiClients.BranchesApiClient
 
         public async Task<SaveBranchInsuranceResponse?> SaveBrancheInsurancesAsync(SaveBranchInsuranceRequest requestBody)
         {
-            var url = "http://example.com/branches/saveBrancheInsurances ";
+            var url = $"{_baseUrl}branches/saveBrancheInsurances ";
 
             string requestBodyString = _jsonSerializer.Serialize(requestBody);
 

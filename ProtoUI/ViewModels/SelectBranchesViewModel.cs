@@ -12,10 +12,11 @@ namespace ProtoUI.ViewModels
     public class SelectBranchesViewModel: ViewModelBase
     {
         private readonly IBranchesApiClient _branchesApiClient;
+        private readonly IJsonSerializerService _jsonSerializer;
 
-        private string _tin = string.Empty;
-        private string _branchId = string.Empty;
-        private string _lastRequestDate = string.Empty;
+        private string _tin = SD.TIN;
+        private string _branchId = SD.BranchID;
+        private string _lastRequestDate = SD.LastRequestDate;
         private string _response = string.Empty;
 
         public IReactiveCommand SendCommand { get; }
@@ -46,6 +47,7 @@ namespace ProtoUI.ViewModels
         public SelectBranchesViewModel() : base()
         {
             _branchesApiClient = new BranchesApiClient(new HttpApiService(new HttpClient()), new JsonSerializerService());
+            _jsonSerializer = new JsonSerializerService();
             SendCommand = ReactiveCommand.Create(Send);
         }
 
@@ -54,8 +56,14 @@ namespace ProtoUI.ViewModels
             try
             {
                 Response = "Request sending..";
-                await Task.Delay(1000);
-                throw new NotImplementedException();
+                var response = await _branchesApiClient.SelectBranchesAsync(new RwandaVSDC.Models.JSON.Branches.SelectBranches.BranchRequest()
+                {
+                    Tin = Tin,
+                    BranchId = BranchId,
+                    LastRequestDate = LastRequestDate
+                });
+                Response = _jsonSerializer.Serialize(response) ?? "NullResponse";
+                SD.LastRequestDate = response?.ResultDate ?? DateTime.Now.ToString("yyyyMMddHHmmss");
             }
             catch (Exception e)
             {

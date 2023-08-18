@@ -25,7 +25,7 @@ namespace RwandaVSDC.Services.ApiClients.NoticesApiClient
 
         public async Task<NoticeResponse?> SelectNoticesAsync(NoticeRequest requestBody)
         {
-            var url = $"{_baseUrl}/notices/selectNotices";
+            var url = $"{_baseUrl}notices/selectNotices";
 
             string requestBodyString = _jsonSerializer.Serialize(requestBody);
 

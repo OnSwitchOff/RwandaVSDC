@@ -1,4 +1,5 @@
-﻿using ReactiveUI;
+﻿using DynamicData;
+using ReactiveUI;
 using RwandaVSDC.Services.ApiClients.StockApiClient;
 using RwandaVSDC.Services.ApiClients.TransactionsPurchaseApiClient;
 using RwandaVSDC.Services.ApiService;
@@ -16,6 +17,7 @@ namespace ProtoUI.ViewModels
     public class SaveStockItemsViewModel : ViewModelBase
     {
         private readonly IStockApiClient _stockApiClient;
+        private readonly IJsonSerializerService _jsonSerializer;
 
         private string _tin = string.Empty;
         private string _branchId = string.Empty;
@@ -36,16 +38,18 @@ namespace ProtoUI.ViewModels
         private string _registrantId = string.Empty;
         private string _modifierName = string.Empty;
         private string _modifierId = string.Empty;
-
-        private ObservableCollection<SaveStockItemsItemInfoViewModel> _itemList = new ObservableCollection<SaveStockItemsItemInfoViewModel>()
-        {
-            new SaveStockItemsItemInfoViewModel(),
-            new SaveStockItemsItemInfoViewModel(),
-            new SaveStockItemsItemInfoViewModel()
-        };
+        private SaveStockItemsItemInfoViewModel? _selectedItem = null;
+        private ObservableCollection<SaveStockItemsItemInfoViewModel> _itemList = new ObservableCollection<SaveStockItemsItemInfoViewModel>();
+        private SaveStockItemsItemInfoViewModel? _editingItem = null;
+        private bool _isEditPanelVisible = false;
 
         private string _response = string.Empty;
         public IReactiveCommand SendCommand { get; }
+        public IReactiveCommand AddItemCommand { get; }
+        public IReactiveCommand EditItemCommand { get; }
+        public IReactiveCommand RemoveItemCommand { get; }
+        public IReactiveCommand ConfirmChangesCommand { get; }
+        public IReactiveCommand DiscardChangesCommand { get; }
         public string Tin { get => _tin; set => this.RaiseAndSetIfChanged(ref _tin, value); }
         public string BranchId { get => _branchId; set => this.RaiseAndSetIfChanged(ref _branchId, value); }
         public string StoredAndReleasedNumber { get => _storedAndReleasedNumber; set => this.RaiseAndSetIfChanged(ref _storedAndReleasedNumber, value); }
@@ -65,13 +69,129 @@ namespace ProtoUI.ViewModels
         public string RegistrantId { get => _registrantId; set => this.RaiseAndSetIfChanged(ref _registrantId, value); }
         public string ModifierName { get => _modifierName; set => this.RaiseAndSetIfChanged(ref _modifierName, value); }
         public string ModifierId { get => _modifierId; set => this.RaiseAndSetIfChanged(ref _modifierId, value); }
-        public string Response { get => _response; set => this.RaiseAndSetIfChanged(ref _response, value); }        
-        public ObservableCollection<SaveStockItemsItemInfoViewModel> ItemList { get => _itemList; set => this.RaiseAndSetIfChanged(ref _itemList, value); }       
+        public string Response { get => _response; set => this.RaiseAndSetIfChanged(ref _response, value); }
+        public SaveStockItemsItemInfoViewModel? SelectedItem { get => _selectedItem;
+            set
+            {
+                if (IsEditPanelVisible)
+                {
+                    value = _selectedItem;
+                }
+                this.RaiseAndSetIfChanged(ref _selectedItem, value);
+            }
+        }
+        public ObservableCollection<SaveStockItemsItemInfoViewModel> ItemList { get => _itemList; set => this.RaiseAndSetIfChanged(ref _itemList, value); }
+        public SaveStockItemsItemInfoViewModel? EditingItem { get => _editingItem; set => this.RaiseAndSetIfChanged(ref _editingItem, value); }
+        public bool IsEditPanelVisible { get => _isEditPanelVisible; set => this.RaiseAndSetIfChanged(ref _isEditPanelVisible, value); }
 
         public SaveStockItemsViewModel() : base()
         {
             _stockApiClient = new StockApiClient(new HttpApiService(new HttpClient()), new JsonSerializerService());
+            _jsonSerializer = new JsonSerializerService();
             SendCommand = ReactiveCommand.Create(Send);
+            AddItemCommand = ReactiveCommand.Create(AddItem);
+            EditItemCommand = ReactiveCommand.Create(EditItem);
+            RemoveItemCommand = ReactiveCommand.Create(RemoveItem);
+            ConfirmChangesCommand = ReactiveCommand.Create(ConfirmChanges);
+            DiscardChangesCommand = ReactiveCommand.Create(DiscardChanges);
+        }
+
+        private void DiscardChanges()
+        {
+            EditingItem = null;
+            IsEditPanelVisible = false;
+        }
+
+        private void ConfirmChanges()
+        {
+            if (SelectedItem is null)
+            {
+                ItemList.Add(new SaveStockItemsItemInfoViewModel
+                {
+                    ItemSequence = EditingItem!.ItemSequence,
+                    ItemCode = EditingItem.ItemCode,
+                    ItemClassificationCode = EditingItem.ItemClassificationCode,
+                    ItemName = EditingItem.ItemName,
+                    Barcode = EditingItem.Barcode,
+                    PackageQuantity = EditingItem.PackageQuantity,
+                    PackagingUnitCode = EditingItem.PackagingUnitCode,
+                    QuantityUnitCode = EditingItem.QuantityUnitCode,
+                    UnitQuantity = EditingItem.UnitQuantity,
+                    ItemExpiredDate = EditingItem.ItemExpiredDate,
+                    UnitPrice = EditingItem.UnitPrice,
+                    SupplyAmount = EditingItem.SupplyAmount,
+                    DiscountAmount = EditingItem.DiscountAmount,
+                    TaxableAmount = EditingItem.TaxableAmount,
+                    TotalAmount = EditingItem.TotalAmount,
+                    TaxationTypeCode = EditingItem.TaxationTypeCode,
+                    TaxAmount = EditingItem.TaxAmount
+                });
+            }
+            else
+            {
+                SelectedItem.ItemSequence = EditingItem!.ItemSequence;
+                SelectedItem.ItemCode = EditingItem.ItemCode;
+                SelectedItem.ItemClassificationCode = EditingItem.ItemClassificationCode;
+                SelectedItem.ItemName = EditingItem.ItemName;
+                SelectedItem.Barcode = EditingItem.Barcode;
+                SelectedItem.PackageQuantity = EditingItem.PackageQuantity;
+                SelectedItem.PackagingUnitCode = EditingItem.PackagingUnitCode;
+                SelectedItem.QuantityUnitCode = EditingItem.QuantityUnitCode;
+                SelectedItem.UnitQuantity = EditingItem.UnitQuantity;
+                SelectedItem.ItemExpiredDate = EditingItem.ItemExpiredDate;
+                SelectedItem.UnitPrice = EditingItem.UnitPrice;
+                SelectedItem.SupplyAmount = EditingItem.SupplyAmount;
+                SelectedItem.DiscountAmount = EditingItem.DiscountAmount;
+                SelectedItem.TaxableAmount = EditingItem.TaxableAmount;
+                SelectedItem.TotalAmount = EditingItem.TotalAmount;
+                SelectedItem.TaxationTypeCode = EditingItem.TaxationTypeCode;
+                SelectedItem.TaxAmount = EditingItem.TaxAmount;
+            }
+            EditingItem = null;
+            IsEditPanelVisible = false;
+        }
+
+        private void RemoveItem()
+        {
+            if (SelectedItem is not null)
+            {
+                ItemList.Remove(SelectedItem);
+            }
+        }
+
+        private void EditItem()
+        {
+            if (SelectedItem is not null)
+            {
+                EditingItem = new SaveStockItemsItemInfoViewModel
+                {
+                    ItemSequence = SelectedItem.ItemSequence,
+                    ItemCode = SelectedItem.ItemCode,
+                    ItemClassificationCode = SelectedItem.ItemClassificationCode,
+                    ItemName = SelectedItem.ItemName,
+                    Barcode = SelectedItem.Barcode,
+                    PackageQuantity = SelectedItem.PackageQuantity,
+                    PackagingUnitCode = SelectedItem.PackagingUnitCode,
+                    QuantityUnitCode = SelectedItem.QuantityUnitCode,
+                    UnitQuantity = SelectedItem.UnitQuantity,
+                    ItemExpiredDate = SelectedItem.ItemExpiredDate,
+                    UnitPrice = SelectedItem.UnitPrice,
+                    SupplyAmount = SelectedItem.SupplyAmount,
+                    DiscountAmount = SelectedItem.DiscountAmount,
+                    TaxableAmount = SelectedItem.TaxableAmount,
+                    TotalAmount = SelectedItem.TotalAmount,
+                    TaxationTypeCode = SelectedItem.TaxationTypeCode,
+                    TaxAmount = SelectedItem.TaxAmount
+                };
+                IsEditPanelVisible = true;
+            }
+        }
+
+        private void AddItem()
+        {
+            SelectedItem = null;
+            EditingItem = new SaveStockItemsItemInfoViewModel();
+            IsEditPanelVisible = true;
         }
 
         private async Task Send()
@@ -81,6 +201,9 @@ namespace ProtoUI.ViewModels
                 Response = "Request sending..";
                 await Task.Delay(1000);
                 throw new NotImplementedException();
+                var response = await _stockApiClient.SaveStockItemsAsync(new RwandaVSDC.Models.JSON.Stock.SaveStockItems.SaveStockRequest());
+                Response = _jsonSerializer.Serialize(response) ?? "NullResponse";
+                SD.LastRequestDate = response?.ResultDate ?? DateTime.Now.ToString("yyyyMMddHHmmss");
             }
             catch (Exception e)
             {

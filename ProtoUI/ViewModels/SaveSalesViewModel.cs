@@ -1,4 +1,5 @@
 ﻿using ReactiveUI;
+using RwandaVSDC.Models.Data;
 using RwandaVSDC.Services.ApiClients.ItemsApiClient;
 using RwandaVSDC.Services.ApiClients.TransactionsSaleApiClient;
 using RwandaVSDC.Services.ApiService;
@@ -19,12 +20,14 @@ namespace ProtoUI.ViewModels
     public class SaveSalesViewModel: ViewModelBase
     {
         private readonly ITransactionsSaleApiClient _transactionsSaleApiClient;
+        private readonly IJsonSerializerService _jsonSerializer;
 
-        private string _tin = string.Empty;
-        private string _branchId = string.Empty;
+        private string _tin = SD.TIN;
+        private string _branchId = SD.BranchID;
         private string _invoiceNumber = string.Empty;
         private string _originalInvoiceNumber = string.Empty;
         private string _customerTin = string.Empty;
+        private string _purchaseCode = string.Empty;
         private string _customerName = string.Empty;
         private string _salesTypeCode = string.Empty;
         private string _receiptTypeCode = string.Empty;
@@ -55,27 +58,26 @@ namespace ProtoUI.ViewModels
         private string _totalAmount = string.Empty;
         private string _purchaseAcceptYesNo = string.Empty;
         private string _remark = string.Empty;
-        private string _registrantName = string.Empty;
-        private string _registrantId = string.Empty;
-        private string _modifierName = string.Empty;
-        private string _modifierId = string.Empty;
+        private string _registrantName = SD.RegistrantName;
+        private string _registrantId = SD.RegistrantID;
+        private string _modifierName = SD.ModifierName;
+        private string _modifierId = SD.ModifierID;
         private SaveSalesReceiptViewModel _receipt = new SaveSalesReceiptViewModel();
-        private ObservableCollection<SaveSaleItemInfoViewModel> _itemList = new ObservableCollection<SaveSaleItemInfoViewModel>()
-        {
-            new SaveSaleItemInfoViewModel(),
-            new SaveSaleItemInfoViewModel(),
-            new SaveSaleItemInfoViewModel()
-        };
+        private ObservableCollection<SaveSaleItemInfoViewModel> _itemList = new ObservableCollection<SaveSaleItemInfoViewModel>();
+        private SaveSaleItemInfoViewModel? _selectedItem = null;
 
 
         private string _response = string.Empty;
 
         public IReactiveCommand SendCommand { get; }
+        public IReactiveCommand AddItemCommand { get; }
+        public IReactiveCommand RemoveItemCommand { get; }
         public string Tin { get => _tin; set => this.RaiseAndSetIfChanged(ref _tin, value); }
         public string BranchId { get => _branchId; set => this.RaiseAndSetIfChanged(ref _branchId, value); }
         public string InvoiceNumber { get => _invoiceNumber; set => this.RaiseAndSetIfChanged(ref _invoiceNumber, value); }
         public string OriginalInvoiceNumber { get => _originalInvoiceNumber; set => this.RaiseAndSetIfChanged(ref _originalInvoiceNumber, value); }
         public string CustomerTin { get => _customerTin; set => this.RaiseAndSetIfChanged(ref _customerTin, value); }
+        public string PurchaseCode { get => _purchaseCode; set => this.RaiseAndSetIfChanged(ref _purchaseCode, value); }
         public string CustomerName { get => _customerName; set => this.RaiseAndSetIfChanged(ref _customerName, value); }
         public string SalesTypeCode { get => _salesTypeCode; set => this.RaiseAndSetIfChanged(ref _salesTypeCode, value); }
         public string ReceiptTypeCode { get => _receiptTypeCode; set => this.RaiseAndSetIfChanged(ref _receiptTypeCode, value); }
@@ -117,11 +119,28 @@ namespace ProtoUI.ViewModels
             get => _itemList;
             set => this.RaiseAndSetIfChanged(ref _itemList, value); 
         }
+        public SaveSaleItemInfoViewModel? SelectedItem { get => _selectedItem; set => this.RaiseAndSetIfChanged(ref _selectedItem, value); }
 
         public SaveSalesViewModel() : base()
         {
             _transactionsSaleApiClient = new TransactionsSaleApiClient(new HttpApiService(new HttpClient()), new JsonSerializerService());
+            _jsonSerializer = new JsonSerializerService();
             SendCommand = ReactiveCommand.Create(Send);
+            AddItemCommand = ReactiveCommand.Create(AddItem);
+            RemoveItemCommand = ReactiveCommand.Create(RemoveItem);
+        }
+
+        private void RemoveItem()
+        {
+            if (SelectedItem is not null)
+            {
+                ItemList.Remove(SelectedItem);
+            }
+        }
+
+        private void AddItem()
+        {
+            ItemList.Add(new SaveSaleItemInfoViewModel());
         }
 
         private async Task Send()
@@ -129,8 +148,10 @@ namespace ProtoUI.ViewModels
             try
             {
                 Response = "Request sending..";
-                await Task.Delay(1000);
-                throw new NotImplementedException();
+                throw new NotImplementedException(); 
+                var response = await _transactionsSaleApiClient.SaveSalesAsync(new RwandaVSDC.Models.JSON.TransactionsSales.SaveSales.SaveSalesRequest());
+                Response = _jsonSerializer.Serialize(response) ?? "NullResponse";
+                SD.LastRequestDate = response?.ResultDate ?? DateTime.Now.ToString("yyyyMMddHHmmss");
             }
             catch (Exception e)
             {

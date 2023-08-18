@@ -12,9 +12,10 @@ namespace ProtoUI.ViewModels
     public class SaveBrancheCustomersViewModel : ViewModelBase
     {
         private readonly IBranchesApiClient _branchesApiClient;
+        private readonly IJsonSerializerService _jsonSerializer;
 
-        private string _tin = string.Empty;
-        private string _branchId = string.Empty;
+        private string _tin = SD.TIN;
+        private string _branchId = SD.BranchID;
         private string _customerNumber = string.Empty;
         private string _customerTin = string.Empty;
         private string _customerName = string.Empty;
@@ -24,10 +25,10 @@ namespace ProtoUI.ViewModels
         private string _faxNumber = string.Empty;
         private string _usedYesNo = string.Empty;
         private string _remark = string.Empty;
-        private string _registrantName = string.Empty;
-        private string _registrantId = string.Empty;
-        private string _modifierName = string.Empty;
-        private string _modifierId = string.Empty;
+        private string _registrantName = SD.RegistrantName;
+        private string _registrantId = SD.RegistrantID;
+        private string _modifierName = SD.ModifierName;
+        private string _modifierId = SD.ModifierID;
 
         private string _response = string.Empty;
 
@@ -119,6 +120,7 @@ namespace ProtoUI.ViewModels
         public SaveBrancheCustomersViewModel() : base()
         {
             _branchesApiClient = new BranchesApiClient(new HttpApiService(new HttpClient()), new JsonSerializerService());
+            _jsonSerializer = new JsonSerializerService();
             SendCommand = ReactiveCommand.Create(Send);
         }
 
@@ -127,8 +129,26 @@ namespace ProtoUI.ViewModels
             try
             {
                 Response = "Request sending..";
-                await Task.Delay(1000);
-                throw new NotImplementedException();
+                var response = await _branchesApiClient.SaveBrancheCustomersAsync(new RwandaVSDC.Models.JSON.Branches.SaveBrancheCustomers.SaveBranchCustomerRequest()
+                {
+                    Tin = Tin,
+                    BranchId = BranchId,
+                    CustomerName = CustomerName,
+                    CustomerNumber = CustomerNumber,
+                    CustomerTIN = CustomerTin,
+                    Address = Address,
+                    Contact = Contact,
+                    Email = Email,
+                    FaxNumber = FaxNumber,
+                    UsedYesNo = UsedYesNo,
+                    Remark = Remark,
+                    RegistrantName = RegistrantName,
+                    RegistrantID = RegistrantId,
+                    ModifierName = ModifierName,
+                    ModifierID = ModifierId
+                });
+                Response = _jsonSerializer.Serialize(response) ?? "NullResponse";
+                SD.LastRequestDate = response?.ResultDate ?? DateTime.Now.ToString("yyyyMMddHHmmss");
             }
             catch (Exception e)
             {

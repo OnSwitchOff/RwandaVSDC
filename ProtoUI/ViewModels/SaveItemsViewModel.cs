@@ -19,9 +19,10 @@ namespace ProtoUI.ViewModels
     public class SaveItemsViewModel: ViewModelBase
     {
         private readonly IItemsApiClient _itemsApiClient;
+        private readonly IJsonSerializerService _jsonSerializer;
 
-        private string _tin = string.Empty;
-        private string _branchId = string.Empty;
+        private string _tin = SD.TIN;
+        private string _branchId = SD.BranchID;
         private string _itemCode = string.Empty;
         private string _itemClassificationCode = string.Empty;
         private string _itemTypeCode = string.Empty;
@@ -38,20 +39,20 @@ namespace ProtoUI.ViewModels
         private CodeInfo? _selectedTaxType = null;
         private string _batchNumber = string.Empty;
         private string _barcode = string.Empty;
-        private string _defaultUnitPrice = string.Empty;
-        private string _group1UnitPrice = string.Empty;
-        private string _group2UnitPrice = string.Empty;
-        private string _group3UnitPrice = string.Empty;
-        private string _group4UnitPrice = string.Empty;
-        private string _group5UnitPrice = string.Empty;
+        private decimal _defaultUnitPrice = 0;
+        private decimal? _group1UnitPrice = null;
+        private decimal? _group2UnitPrice = null;
+        private decimal? _group3UnitPrice = null;
+        private decimal? _group4UnitPrice = null;
+        private decimal? _group5UnitPrice = null;
         private string _additionalInfo = string.Empty;
-        private string _saftyQuantity = string.Empty;
+        private decimal? _saftyQuantity = null;
         private string _insuranceAppicableYesNo = string.Empty;
         private string _usedYesNo = string.Empty;
-        private string _registrantName = string.Empty;
-        private string _registrantId = string.Empty;
-        private string _modifierName = string.Empty;
-        private string _modifierId = string.Empty;
+        private string _registrantName = SD.RegistrantName;
+        private string _registrantId = SD.RegistrantID;
+        private string _modifierName = SD.ModifierName;
+        private string _modifierId = SD.ModifierID;
 
 
         private string _response = string.Empty;
@@ -70,14 +71,14 @@ namespace ProtoUI.ViewModels
         public string TaxationTypeCode { get => _taxationTypeCode; set => this.RaiseAndSetIfChanged(ref _taxationTypeCode, value); }
         public string BatchNumber { get => _batchNumber; set => this.RaiseAndSetIfChanged(ref _batchNumber, value); }
         public string Barcode { get => _barcode; set => this.RaiseAndSetIfChanged(ref _barcode, value); }
-        public string DefaultUnitPrice { get => _defaultUnitPrice; set => this.RaiseAndSetIfChanged(ref _defaultUnitPrice, value); }
-        public string Group1UnitPrice { get => _group1UnitPrice; set => this.RaiseAndSetIfChanged(ref _group1UnitPrice, value); }
-        public string Group2UnitPrice { get => _group2UnitPrice; set => this.RaiseAndSetIfChanged(ref _group2UnitPrice, value); }
-        public string Group3UnitPrice { get => _group3UnitPrice; set => this.RaiseAndSetIfChanged(ref _group3UnitPrice, value); }
-        public string Group4UnitPrice { get => _group4UnitPrice; set => this.RaiseAndSetIfChanged(ref _group4UnitPrice, value); }
-        public string Group5UnitPrice { get => _group5UnitPrice; set => this.RaiseAndSetIfChanged(ref _group5UnitPrice, value); }
+        public decimal DefaultUnitPrice { get => _defaultUnitPrice; set => this.RaiseAndSetIfChanged(ref _defaultUnitPrice, value); }
+        public decimal? Group1UnitPrice { get => _group1UnitPrice; set => this.RaiseAndSetIfChanged(ref _group1UnitPrice, value); }
+        public decimal? Group2UnitPrice { get => _group2UnitPrice; set => this.RaiseAndSetIfChanged(ref _group2UnitPrice, value); }
+        public decimal? Group3UnitPrice { get => _group3UnitPrice; set => this.RaiseAndSetIfChanged(ref _group3UnitPrice, value); }
+        public decimal? Group4UnitPrice { get => _group4UnitPrice; set => this.RaiseAndSetIfChanged(ref _group4UnitPrice, value); }
+        public decimal? Group5UnitPrice { get => _group5UnitPrice; set => this.RaiseAndSetIfChanged(ref _group5UnitPrice, value); }
         public string AdditionalInfo { get => _additionalInfo; set => this.RaiseAndSetIfChanged(ref _additionalInfo, value); }
-        public string SaftyQuantity { get => _saftyQuantity; set => this.RaiseAndSetIfChanged(ref _saftyQuantity, value); }
+        public decimal? SaftyQuantity { get => _saftyQuantity; set => this.RaiseAndSetIfChanged(ref _saftyQuantity, value); }
         public string UsedYesNo { get => _usedYesNo; set => this.RaiseAndSetIfChanged(ref _usedYesNo, value); }
         public string RegistrantName { get => _registrantName; set => this.RaiseAndSetIfChanged(ref _registrantName, value); }
         public string RegistrantId { get => _registrantId; set => this.RaiseAndSetIfChanged(ref _registrantId, value); }
@@ -144,6 +145,7 @@ namespace ProtoUI.ViewModels
         public SaveItemsViewModel() : base()
         {
             _itemsApiClient = new ItemsApiClient(new HttpApiService(new HttpClient()), new JsonSerializerService());
+            _jsonSerializer = new JsonSerializerService();
             SendCommand = ReactiveCommand.Create(Send);
             Nations = CountryCodes.Codes.Select( kv => kv.Value).ToList();
             ProductTypes = ProductTypeCodes.Codes.Select(kv => kv.Value).ToList();
@@ -157,8 +159,43 @@ namespace ProtoUI.ViewModels
             try
             {
                 Response = "Request sending..";
-                await Task.Delay(1000);
-                throw new NotImplementedException();
+                var response = await _itemsApiClient.SaveItemsAsync(new RwandaVSDC.Models.JSON.Items.SaveItems.SaveItemRequest()
+                {
+                    Tin = Tin,
+                    BranchId = BranchId,
+                    ItemCode = ItemCode,
+                    ItemClassificationCode = ItemClassificationCode,
+                    ItemTypeCode = ItemTypeCode,
+                    ItemName = ItemName,
+                    ItemStandardName = ItemStandartName,
+                    OriginPlaceCode = OriginPlaceCode,
+                    PackagingUnitCode = PackagingUnitCode,
+                    QuantityUnitCode = QuantityUnitCode,
+                    TaxationTypeCode = TaxationTypeCode,
+                    BatchNumber = BatchNumber,
+                    Barcode = Barcode,
+                    DefaultUnitPrice = DefaultUnitPrice,
+                    Group1UnitPrice = Group1UnitPrice,
+                    Group2UnitPrice = Group2UnitPrice,
+                    Group3UnitPrice = Group3UnitPrice,
+                    Group4UnitPrice = Group4UnitPrice,
+                    Group5UnitPrice = Group5UnitPrice,
+                    AdditionalInformation = AdditionalInfo,
+                    SaftyQuantity = SaftyQuantity,
+                    InsuranceAppicableYesNo = InsuranceAppicableYesNo,
+                    UsedYesNo = UsedYesNo,
+                    RegistrantID = RegistrantId,
+                    RegistrantName = RegistrantName,
+                    ModifierID = ModifierId,
+                    ModifierName = ModifierName
+                });
+                Response = _jsonSerializer.Serialize(response) ?? "NullResponse";
+                SD.LastRequestDate = response?.ResultDate ?? DateTime.Now.ToString("yyyyMMddHHmmss");
+
+                if (Response.Contains("It is succeeded"))
+                {
+                    ItemCodeBuilder.Up();
+                }
             }
             catch (Exception e)
             {

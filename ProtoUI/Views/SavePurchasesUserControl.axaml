@@ -259,13 +259,23 @@
 						<TextBlock Width="200"  Text="39. Modifier ID" HorizontalAlignment="Left" VerticalAlignment="Center" />
 						<TextBox Width="150" Text="{Binding ModifierId, Mode=TwoWay}"/>
 						<Ellipse Fill="Blue" Width="14" Height="14" ToolTip.Tip="Modifier ID" Margin="5"/>
-					</StackPanel>				
-					<!--Items List-->
-					<TextBlock Text="40. Items List" Margin="5" FontWeight="Bold"/>
-					<DataGrid Items="{Binding ItemList}" AutoGenerateColumns="True" Background="White">
-					</DataGrid>
+					</StackPanel>
 				</StackPanel>
 			</ScrollViewer>
+			<Grid Grid.Row="1" Background="Gray">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="auto"/>
+					<RowDefinition Height="*"/>
+				</Grid.RowDefinitions>
+				<!--Items List-->
+				<TextBlock Grid.Row="0" Text="40. Items List" Margin="5" FontWeight="Bold" VerticalAlignment="Center"/>
+				<StackPanel  Grid.Row="0"  Orientation="Horizontal" HorizontalAlignment="Right">
+					<Button Content="Add" Command="{Binding	AddItemCommand}" Margin="5"/>
+					<Button Content="Remove" Command="{Binding	RemoveItemCommand}" Margin="5"/>
+				</StackPanel>
+				<DataGrid  Grid.Row="1"  Items="{Binding ItemList}" SelectedItem="{Binding	SelectedItem}" AutoGenerateColumns="True" Background="Transparent" RowBackground="White" AlternatingRowBackground="LightGray" GridLinesVisibility="Vertical">
+				</DataGrid>
+			</Grid>
 		</Grid>
 		<!--Response-->
 		<Grid Grid.Column="1" Grid.Row="0" Background="LightBlue">

@@ -15,9 +15,10 @@ namespace ProtoUI.ViewModels
     public class SelectCustomerViewModel: ViewModelBase
     {
         private readonly ICustomersApiClient _customersApiClient;
+        private readonly IJsonSerializerService _jsonSerializer;
 
-        private string _tin = string.Empty;
-        private string _branchId = string.Empty;
+        private string _tin = SD.TIN;
+        private string _branchId = SD.BranchID;
         private string _customerTin = string.Empty;
         private string _response = string.Empty;
 
@@ -50,6 +51,7 @@ namespace ProtoUI.ViewModels
         public SelectCustomerViewModel(): base()
         {
             _customersApiClient = new CustomersApiClient(new HttpApiService(new HttpClient()), new JsonSerializerService());
+            _jsonSerializer = new JsonSerializerService();
             SendCommand = ReactiveCommand.Create(Send);
         }
 
@@ -58,8 +60,14 @@ namespace ProtoUI.ViewModels
             try
             {
                 Response = "Request sending..";
-                await Task.Delay(1000);
-                throw new NotImplementedException();
+                var response = await _customersApiClient.SelectCustomerAsync(new RwandaVSDC.Models.JSON.Customers.SelectCustomer.CustomerRequest()
+                {
+                    Tin = Tin,
+                    BranchId = BranchId,
+                    CustomerTin = CustomerTin
+                });
+                Response = _jsonSerializer.Serialize(response) ?? "NullResponse";
+                SD.LastRequestDate = response?.ResultDate ?? DateTime.Now.ToString("yyyyMMddHHmmss");
             }
             catch (Exception e)
             {
